@@ -64,6 +64,8 @@
 #include "bits.h"
 #include "nn.h"
 
+#include "h_export.h"
+
 #include <vector>
 #include <queue>
 using namespace std;
@@ -75,7 +77,7 @@ using namespace std;
     #ifndef linux
 			typedef int (FAR *GETENTITYAPI)(DLL_FUNCTIONS *, int);
 			typedef int (FAR *GETNEWDLLFUNCTIONS)(NEW_DLL_FUNCTIONS *, int *);
-			typedef void (DLLEXPORT *GIVEFNPTRSTODLL)(enginefuncs_t *, globalvars_t *);
+			typedef void ( GIVEFNPTRS_DLLEXPORT *GIVEFNPTRSTODLL)(enginefuncs_t *, globalvars_t *);
 			typedef void (FAR *LINK_ENTITY_FUNC)(entvars_t *);
 	#else
 

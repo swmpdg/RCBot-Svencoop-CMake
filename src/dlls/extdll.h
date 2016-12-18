@@ -32,50 +32,7 @@
 #pragma warning(disable : 4514)		// unreferenced inline function removed
 #pragma warning(disable : 4100)		// unreferenced formal parameter
 
-#ifndef __linux__
-// Prevent tons of unused windows definitions
-#define WIN32_LEAN_AND_MEAN
-#define NOWINRES
-#define NOSERVICE
-#define NOMCX
-#define NOIME
-#include <windows.h>
- 
-// Misc C-runtime library headers
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
- 
-#else
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <string.h>
-#include <ctype.h>
-#include <limits.h>
- 
-#define MAX_PATH PATH_MAX
-#ifdef __CYGWIN__
-#define ULONG unsigned long
-#else
-#define ULONG ulong
-#endif
-#define FALSE 0
-#define TRUE  1
- 
-#ifndef max
-#define max(a,b)    (((a) > (b)) ? (a) : (b))
-#endif
- 
-#ifndef min
-#define min(a,b)    (((a) < (b)) ? (a) : (b))
-#endif
- 
-#define itoa(a,b,c) sprintf(b, "%d", a)
- 
-typedef unsigned char BYTE;
-#endif
+#include "Platform.h"
 
 // Header file containing definition of globalvars_t and entvars_t
 typedef int	func_t;					//

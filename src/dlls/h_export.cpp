@@ -53,6 +53,8 @@
 #include "cbase.h"
 #include "engine.h"
 
+#include "h_export.h"
+
 #include "bot_const.h"
 #include "bot.h"
 
@@ -128,7 +130,7 @@ void _fini (void)
 #ifdef __BORLANDC__
 extern "C" DLLEXPORT void EXPORT GiveFnptrsToDll(enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals)
 #else
-void DLLEXPORT GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals )
+void GIVEFNPTRS_DLLEXPORT GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals )
 #endif // __BORLANDC__
 #else // ELSE __linux__
 extern "C" DLLEXPORT void GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals )
