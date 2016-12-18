@@ -1,0 +1,9 @@
+#Visual Studio local outputs
+*.ncb
+*.opt
+*.plg
+*.suo
+*.user
+
+#CMake bin directories
+bin*/*
