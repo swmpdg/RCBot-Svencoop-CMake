@@ -614,7 +614,7 @@ void pfnGetAimVector(edict_t* ent, float speed, float *rgflReturn)
     (*g_engfuncs.pfnGetAimVector)(ent, speed, rgflReturn);
 #endif
 }
-void pfnServerCommand(char* str)
+void pfnServerCommand(const char* str)
 {
     if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnServerCommand: %s\n",str); fclose(fp); }
 #ifdef RCBOT_META_BUILD
@@ -963,7 +963,7 @@ void pfnCVarSetString(const char *szVarName, const char *szValue)
     (*g_engfuncs.pfnCVarSetString)(szVarName, szValue);
 #endif
 }
-void* pfnPvAllocEntPrivateData(edict_t *pEdict, long cb)
+void* pfnPvAllocEntPrivateData(edict_t *pEdict, int32 cb)
 {
     if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnPvAllocEntPrivateData:\n"); fclose(fp); }
 #ifdef RCBOT_META_BUILD
@@ -1127,7 +1127,7 @@ void pfnGetBonePosition(const edict_t* pEdict, int iBone, float *rgflOrigin, flo
 #endif
 }
 
-unsigned long pfnFunctionFromName( const char *pName )
+uint32 pfnFunctionFromName( const char *pName )
 {
     if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnFunctionFromName:\n"); fclose(fp); }
 #ifdef RCBOT_META_BUILD
@@ -1137,7 +1137,7 @@ unsigned long pfnFunctionFromName( const char *pName )
 #endif
 }
 
-const char *pfnNameForFunction( unsigned long function )
+const char *pfnNameForFunction( uint32 function )
 {
     if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnNameForFunction:\n"); fclose(fp); }
 #ifdef RCBOT_META_BUILD
@@ -1212,7 +1212,7 @@ CRC32_t pfnCRC32_Final(CRC32_t pulCRC)
     return (*g_engfuncs.pfnCRC32_Final)(pulCRC);
 #endif
 }
-long pfnRandomLong(long lLow, long lHigh)
+int32 pfnRandomLong(int32 lLow, int32 lHigh)
 {
     //   if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnRandomLong: lLow=%d lHigh=%d\n",lLow,lHigh); fclose(fp); }
 #ifdef RCBOT_META_BUILD
@@ -1373,7 +1373,7 @@ char* pfnGetInfoKeyBuffer(edict_t *e)
     return (*g_engfuncs.pfnGetInfoKeyBuffer)(e);
 #endif
 }
-char* pfnInfoKeyValue(char *infobuffer, char *key)
+char* pfnInfoKeyValue(char *infobuffer, const char *key)
 {
     if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnInfoKeyValue: %s %s\n",infobuffer,key); fclose(fp); }
 #ifdef RCBOT_META_BUILD
