@@ -10,3 +10,5 @@ Rules.depend
 
 msgs/*
 
+Debug/*
+Release/*

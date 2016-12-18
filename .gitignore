@@ -4,6 +4,8 @@
 *.plg
 *.suo
 *.user
+*.db
+*.opendb
 
 #CMake bin directories
 bin*/*
