@@ -2102,7 +2102,7 @@ BOOL LoadHALBrainForPersonality ( bot_profile_t *pBotProfile, BOOL bPreTrain )
    FILE *fp;
    char filename[512];
    char file[256];
-   char cookie[8];
+   char cookie[9]; //Needs to store null terminator as well. - Solokiller
    
    //int iNameLength;
    //char *szName;
@@ -2126,13 +2126,14 @@ BOOL LoadHALBrainForPersonality ( bot_profile_t *pBotProfile, BOOL bPreTrain )
    }
 
    // check for brain file validity
-   fread (cookie, sizeof ("RCBOTHAL"), 1, fp); // read the brain signature
+   //Sizeof on a string literal is usually a bad idea. - Solokiller
+   fread (cookie, sizeof( cookie ) /*sizeof ("RCBOTHAL")*/, 1, fp); // read the brain signature
 
    if (strcmp (cookie, "RCBOTHAL") != 0)
    {
 	  // delete szName;
       BotMessage(NULL,0,"LoadHALBrainForPersonality(): %s's HAL brain damaged!", pBotProfile->m_szBotName); // bad brain
-	  BotMessage(NULL,2,"damanged bot file, delete %s/%d.brn file", BOT_PROFILES_FOLDER,pBotProfile->m_iProfileId); // bad brain
+	  BotMessage(NULL,2,"damaged bot file, delete %s/%d.brn file", BOT_PROFILES_FOLDER,pBotProfile->m_iProfileId); // bad brain
       fclose (fp); // close file
       return (TRUE); // there was an error, return TRUE
    }
