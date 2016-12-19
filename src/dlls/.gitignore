@@ -12,3 +12,6 @@ msgs/*
 
 Debug/*
 Release/*
+
+#Ignore linkgame.cpp, which is generated automatically for local use only.
+linkgame.cpp
