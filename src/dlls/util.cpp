@@ -86,7 +86,7 @@ BOOL UTIL_TankUsed ( edict_t *pTank )
 	return ( pTank->v.netname && *STRING(pTank->v.netname) );
 }
 
-BOOL UTIL_EntityHasClassname ( edict_t *pEntity, char *classname )
+BOOL UTIL_EntityHasClassname ( edict_t *pEntity, const char *classname )
 {
 	return (strcmp(STRING(pEntity->v.classname),classname) == 0);
 }
@@ -1352,7 +1352,7 @@ int UTIL_CountBuiltEntities ( char *classname )
 	return iTotal;
 }
 
-int UTIL_CountEntities ( char *classname )
+int UTIL_CountEntities ( const char *classname )
 {
 	edict_t *pEnt = NULL;
 	int iTotal = 0;
@@ -1826,7 +1826,7 @@ BOOL UTIL_makeTSweapon ( edict_t *pOwner, eTSWeaponID weaponid )
 	if ( (pWeapon == NULL) || FNullEnt(pWeapon) )
 		return FALSE;
 
-	char *keyname = "tsweaponid";
+	const char *keyname = "tsweaponid";
 	char keyvalue[8];
 
 	KeyValueData key;
@@ -1897,7 +1897,7 @@ BOOL UTIL_makeTSweapon ( edict_t *pOwner, eTSWeaponID weaponid )
 	return TRUE;
 }
 
-void UTIL_BuildFileName(char *filename, char *arg1, char *arg2 )
+void UTIL_BuildFileName(char *filename, const char *arg1, const char *arg2 )
 {
 // Build file name will set up the directoy for the filename
 	strcpy(filename,gBotGlobals.botFolder());
@@ -1954,7 +1954,7 @@ edict_t *UTIL_FacingEnt ( edict_t *pPlayer, BOOL any )
 // UTIL_LogPrintf - Prints a logged message to console.
 // Preceded by LOG: ( timestamp ) < message >
 //=========================================================
-void UTIL_LogPrintf( char *fmt, ... )
+void UTIL_LogPrintf( const char *fmt, ... )
 {
    va_list        argptr;
    static char    string[1024];
@@ -2233,7 +2233,7 @@ void UTIL_BotToolTip ( edict_t *pEntity, eLanguage iLang, eToolTip iTooltip )
 //
 {
 	static HudText hudmessage = HudText(TRUE);
-	static char *tooltips[BOT_LANG_MAX][BOT_TOOL_TIP_MAX] = 
+	static const char *tooltips[BOT_LANG_MAX][BOT_TOOL_TIP_MAX] = 
 	{ 
 		//---------------------------------------------------------------------------------------------------------------------<MAX
 		{"Welcome %n\nUse the command \"rcbot addbot\" to add a bot\nor use the bot menu (\"rcbot bot_menu\")",
@@ -2393,14 +2393,14 @@ BOOL UTIL_IsButton ( edict_t *pButton )
 }
 
 
-edict_t *UTIL_FindNearestEntity ( char **szClassnames, int iNames, Vector vOrigin, float fRange, BOOL bVisible, edict_t *pIgnore )
+edict_t *UTIL_FindNearestEntity ( const char * const*szClassnames, int iNames, Vector vOrigin, float fRange, BOOL bVisible, edict_t *pIgnore )
 {
 	edict_t *pEntity;
 	edict_t *pNearest;
 
 	int i;
 
-	char *szClassname;
+	const char *szClassname;
 
 	float fDistance;
 

@@ -166,19 +166,19 @@ class MPlugin {
 		char *str_action(void)		{ return(str_action(SA_SIMPLE)); };
 		char *str_source(void)		{ return(str_source(SO_SIMPLE)); };
 
-		char *str_loadable(void) { 
+		const char *str_loadable(void) { 
 			if(info) return(str_loadtime(info->loadable, SL_SIMPLE)); 
 			else return(" -");
 		};
-		char *str_unloadable(void) { 
+		const char *str_unloadable(void) { 
 			if(info) return(str_loadtime(info->unloadable, SL_SIMPLE)); 
 			else return(" -");
 		};
-		char *str_loadable(STR_LOADTIME fmt) { 
+		const char *str_loadable(STR_LOADTIME fmt) { 
 			if(info) return(str_loadtime(info->loadable, fmt)); 
 			else return(" -");
 		};
-		char *str_unloadable(STR_LOADTIME fmt) { 
+		const char *str_unloadable(STR_LOADTIME fmt) { 
 			if(info) return(str_loadtime(info->unloadable, fmt)); 
 			else return(" -");
 		};

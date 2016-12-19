@@ -111,9 +111,9 @@ int GetMessageID ( const char *szMsg );
 void GetGameDirectory ( char *szDir );
 #endif
 
-void DebugMessage ( int iDebugLevel, edict_t *pEntity, int errorlevel, char *fmt, ... );
-void BotMessage (edict_t *pEntity, int errorlevel, char *fmt, ... );
-void BugMessage (edict_t *pEntity, char *fmt, ...);
+void DebugMessage ( int iDebugLevel, edict_t *pEntity, int errorlevel, const char *fmt, ... );
+void BotMessage (edict_t *pEntity, int errorlevel, const char *fmt, ... );
+void BugMessage (edict_t *pEntity, const char *fmt, ...);
 
 int GetPlayerRepId ( const char *szPlayerName );
 int GetPlayerEdictRepId ( edict_t *pEdict );
@@ -133,12 +133,12 @@ void UTIL_BotScreenShake( const Vector &center, float amplitude, float frequency
 edict_t *UTIL_GetPlayerByPlayerId ( int id );
 Vector UTIL_FurthestVectorAroundYaw ( CBot *pBot );
 int UTIL_ClassOnTeam ( int iClass, int iTeam );
-BOOL UTIL_EntityHasClassname ( edict_t *pEntity, char *classname );
+BOOL UTIL_EntityHasClassname ( edict_t *pEntity, const char *classname );
 float UTIL_GetPlayerEnergy( entvars_t *pev );
 int UTIL_NS_GetMaxArmour ( edict_t *pEntity );
 edict_t *UTIL_GetCommander ( void );
-int UTIL_CountEntities ( char *classname );
-edict_t *BotFunc_FindRandomEntity ( char *szClassname );
+int UTIL_CountEntities ( const char *classname );
+edict_t *BotFunc_FindRandomEntity ( const char *szClassname );
 BOOL UTIL_IsGrenadeRocket ( edict_t *pEntity );
 //void BotFunc_StringCopy(char *, const char *);
 BOOL BotFunc_IsLongRangeWeapon(int iId);
@@ -211,7 +211,7 @@ edict_t *UTIL_TFC_PlayerHasFlag(edict_t *pPlayer);
 void UTIL_PlaySoundToAll ( const char *szSound );
 void UTIL_PlaySound ( edict_t *pPlayer, const char *szSound );
 
-void BotPrintTalkMessageOne ( edict_t *pClient, char *fmt, ... );
+void BotPrintTalkMessageOne ( edict_t *pClient, const char *fmt, ... );
 
 BOOL UTIL_FuncResourceIsOccupied ( edict_t *pFuncResource );
 int NS_GetPlayerLevel ( int exp );
@@ -226,7 +226,7 @@ edict_t	   *UTIL_FindEntityByTargetname	( edict_t *pentStart, const char *szName
 	int		UTIL_GetBotIndex			( const edict_t *pEdict );
     int		UTIL_MasterTriggered(string_t sMaster, CBaseEntity *pActivator);
    void		UTIL_ShowMenu		( edict_t *pEdict, int slots, int displaytime, BOOL needmore, char *pText );
-   void		UTIL_BuildFileName	(char *filename, char *arg1, char *arg2=NULL);
+   void		UTIL_BuildFileName	(char *filename, const char *arg1, const char *arg2=NULL);
    
    edict_t *UTIL_FacingEnt ( edict_t *pPlayer, BOOL any = FALSE );
 
@@ -236,7 +236,7 @@ edict_t	   *UTIL_FindEntityByTargetname	( edict_t *pentStart, const char *szName
 
 float UTIL_EntityAnglesToVector2D ( entvars_t *pev, const Vector *pOrigin ); // For 2d Movement
 float UTIL_EntityAnglesToVector3D ( entvars_t *pev, const Vector *pOrigin ); 
-edict_t *UTIL_FindNearestEntity ( char **szClassnames, int iNames, Vector vOrigin, float fRange, BOOL bVisible, edict_t *pIgnore = NULL );
+edict_t *UTIL_FindNearestEntity ( const char * const*szClassnames, int iNames, Vector vOrigin, float fRange, BOOL bVisible, edict_t *pIgnore = NULL );
 
 	Vector UTIL_LengthFromVector(Vector relation, float length);
 
@@ -273,7 +273,7 @@ edict_t *UTIL_CheckTeleExit ( Vector vOrigin, edict_t *pOwner, edict_t *pEntranc
 
 	float UTIL_AngleDiff( float destAngle, float srcAngle );
 
-	void BotPrintTalkMessage (char *fmt, ...);
+	void BotPrintTalkMessage (const char *fmt, ...);
 
 	int BotFunc_GetBitSetOf ( int iBits );
 	void BotFile_Write ( char *string );
@@ -854,12 +854,12 @@ public:
 
 	BOOL operator == ( const CBotTask &Task );
 
-	char *getTaskDescription ()
+	const char *getTaskDescription ()
 	{
 		return CBotTask::_getTaskDescription(m_Task);
 	}
 
-	static char *_getTaskDescription ( eBotTask itask )
+	static const char *_getTaskDescription ( eBotTask itask )
 	{
 		switch ( itask )
 		{
@@ -1039,7 +1039,7 @@ public:
 		return m_iScheduleDescription;
 	}
 	
-	char *getScheduleDescription ()
+	const char *getScheduleDescription ()
 	{
 		switch ( m_iScheduleDescription )
 		{
@@ -1572,7 +1572,7 @@ typedef struct bot_profile_s
 
 	char *m_szFavMap;
 	char *m_szSpray;
-	char *m_szBotName;
+	const char *m_szBotName;
 	
 //////////////////////
 // NS STUFF
@@ -4810,7 +4810,7 @@ public:
 		memset(this,0,sizeof(CAllowedPlayer));
 	}
 	
-	CAllowedPlayer ( const char *szName, char *szPass, int iAccessLevel, char *szSteamId )
+	CAllowedPlayer ( const char *szName, const char *szPass, int iAccessLevel, char *szSteamId )
 	{
 		strcpy(m_szName,szName);
 		strncpy(m_szPass,szPass,BOT_MAX_PASSWORD_LEN-1);
@@ -4902,7 +4902,7 @@ public:
 		}
 	}
 
-	void AddPlayer ( const char *szName, char *szPass, int iAccessLevel, char *szSteamId )
+	void AddPlayer ( const char *szName, const char *szPass, int iAccessLevel, char *szSteamId )
 	{
 		CAllowedPlayer PlayerToAdd = CAllowedPlayer(szName,szPass,iAccessLevel,szSteamId);
 
@@ -5221,7 +5221,7 @@ typedef enum { MASTER_NONE, MASTER_NOT_TRIGGERED, MASTER_TRIGGERED, MASTER_FAULT
 class CMasterEntity
 {
 public:
-	CMasterEntity ( edict_t *pEntity, char *szMasterName )
+	CMasterEntity ( edict_t *pEntity, const char *szMasterName )
 	{
 		m_pEntity = pEntity;
 		m_szMasterName = new char [strlen(szMasterName)+1];
@@ -5270,7 +5270,7 @@ public:
 		m_Masters.Destroy();
 	}
 
-	void AddMaster ( edict_t *pEntity, char *szMasterName )
+	void AddMaster ( edict_t *pEntity, const char *szMasterName )
 	{
 		m_Masters.Push(new CMasterEntity(pEntity,szMasterName));
 	}
@@ -6522,7 +6522,7 @@ public:
 	int TFC_getBestClass ( int prefclass, int iTeam );
 	BOOL TFC_canGoClass ( int iClass, int iTeam );
 	int TFC_getBestTeam ( int team );
-	char *TFC_getClassName ( int iClass );
+	const char *TFC_getClassName ( int iClass );
 
 	//short int m_iNumHivesAdded;
 
@@ -6917,7 +6917,7 @@ void GetGameDirectory ( char *szDir );
 float UTIL_GetAvoidAngle(edict_t *pEdict,Vector origin);
 void ReadBotUsersConfig ( void );
 void BotFunc_MakeSquad  ( CClient *pClient );
-void AssertMessage ( BOOL bAssert, char *fmt, ... );
+void AssertMessage ( BOOL bAssert, const char *fmt, ... );
 int UTIL_GetBuildWaypoint ( Vector vSpawn, dataStack<int> *iFailedGoals = NULL );
 int BotFunc_GetStructureForGorgeBuild ( entvars_t *pGorge, entvars_t *pEntitypev );
 void BotFunc_KickBotFromTeam ( int iTeam );

@@ -121,9 +121,9 @@ void CBotGlobals :: ReadBotFolder ( void )
 }
 
 
-char *CBotGlobals :: TFC_getClassName ( int iClass )
+const char *CBotGlobals :: TFC_getClassName ( int iClass )
 {
-	static char *szClasses[] = 
+	static const char *szClasses[] = 
 	{ 
 		"civilian", "scout", "sniper", 
 		"soldier", "demoman", "medic", 

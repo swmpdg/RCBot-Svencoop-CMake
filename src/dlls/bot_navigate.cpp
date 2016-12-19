@@ -1519,7 +1519,7 @@ BOOL BotNavigate_UpdateWaypoint ( CBot *pBot )
 		{
 			// find nearest pushable
 
-			char *szEntity[1] = {"func_pushable"};
+			const char *szEntity[1] = {"func_pushable"};
 			
 			// not already trying to push a pushable
 			if ( !pBot->m_Tasks.HasTask(BOT_TASK_PUSH_PUSHABLE) )
@@ -2104,7 +2104,7 @@ BOOL CheckLift ( CBot *pBot, Vector vCheckOrigin, Vector vCheckToOrigin )
 							if ( iWpt != -1 )
 							{
 								// look for possible buttons
-								char *szClassnames[3] = {"func_button","button_target","func_rot_button"};
+								const char *szClassnames[3] = {"func_button","button_target","func_rot_button"};
 								
 								// check nearby the lift button waypoint
 								edict_t *pButton = UTIL_FindNearestEntity(szClassnames,3,WaypointOrigin(iWpt),fRange,TRUE);

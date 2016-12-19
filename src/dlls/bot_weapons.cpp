@@ -363,7 +363,7 @@ BOOL CBotWeapon :: 	HasWeapon ( edict_t *pEdict )
 				{			
 					edict_t *pWeapon = NULL;
 					
-					char *szClassname = this->GetClassname();
+					const char *szClassname = this->GetClassname();
 					
 					if ( szClassname == NULL )
 						return FALSE; // error

@@ -4924,7 +4924,7 @@ void CBot :: LookForNewTasks ( void )
 				// look for weapons
 				
 				int i;
-				char *szWeapon;
+				const char *szWeapon;
 				CWeapon *pWeapon;
 				edict_t *pSearchWeapon;
 				edict_t *pFoundWeapon = NULL;
@@ -5057,7 +5057,7 @@ void CBot :: LookForNewTasks ( void )
 				
 				if ( iWpt != -1 )
 				{
-					char *szClassnames[1] = {"monster_scientist"};
+					const char *szClassnames[1] = {"monster_scientist"};
 					
 					edict_t *pSci = UTIL_FindNearestEntity(szClassnames,1,WaypointOrigin(iWpt),64.0,TRUE);
 					
@@ -5088,7 +5088,7 @@ void CBot :: LookForNewTasks ( void )
 				
 				if ( iWpt != -1 )
 				{
-					char *szClassnames[2] = {"monster_barney","monster_otis"};
+					const char *szClassnames[2] = {"monster_barney","monster_otis"};
 					
 					edict_t *pBarney = UTIL_FindNearestEntity(szClassnames,2,WaypointOrigin(iWpt),64.0,TRUE);
 					
@@ -7356,7 +7356,7 @@ BOOL CBot :: SwitchWeapon ( int iId )
 			if ( (pWeapon = m_Weapons.GetWeapon(iId)) != NULL )
 			{
 				// get its class name from our list
-				char *szClassname = pWeapon->GetClassname();
+				const char *szClassname = pWeapon->GetClassname();
 				
 				// crap.. something wrong
 				if ( szClassname == NULL )
@@ -8812,7 +8812,7 @@ BOOL CBot :: Touch ( edict_t *pentTouched )
 
 						if ( iWpt != -1 )
 						{
-							char *szClassnames[3] = {"func_button","button_target","func_rot_button"};
+							const char *szClassnames[3] = {"func_button","button_target","func_rot_button"};
 
 							edict_t *pButton = UTIL_FindNearestEntity(szClassnames,3,WaypointOrigin(iWpt),fRange,TRUE);
 
@@ -9835,7 +9835,7 @@ BOOL EntityIsAlive(edict_t *pEdict)
            (pEdict->v.health > 0));
 }
 
-void BugMessage (edict_t *pEntity, char *fmt, ...)
+void BugMessage (edict_t *pEntity, const char *fmt, ...)
 {
 	va_list argptr; 
 	static char string[1024];
@@ -9849,7 +9849,7 @@ void BugMessage (edict_t *pEntity, char *fmt, ...)
 	UTIL_LogPrintf("%s%s%s%s","BUG: ",string," Report bugs to : ",BOT_AUTHOR);
 }
 
-void AssertMessage ( BOOL bAssert, char *fmt, ... )
+void AssertMessage ( BOOL bAssert, const char *fmt, ... )
 {
 	if ( !bAssert )
 	{
@@ -9864,7 +9864,7 @@ void AssertMessage ( BOOL bAssert, char *fmt, ... )
 	}
 }
 
-void DebugMessage ( int iDebugLevel, edict_t *pEntity, int errorlevel, char *fmt, ... )
+void DebugMessage ( int iDebugLevel, edict_t *pEntity, int errorlevel, const char *fmt, ... )
 {
 	va_list argptr; 
 	static char string[1024];
@@ -9917,7 +9917,7 @@ void DebugMessage ( int iDebugLevel, edict_t *pEntity, int errorlevel, char *fmt
 	BotMessage(pEntity,errorlevel,"%s%s",szDebugMsg,string);
 }
 
-void BotPrintTalkMessage (char *fmt, ...) 
+void BotPrintTalkMessage (const char *fmt, ...) 
 {
 	va_list argptr; 
 	static char string[1024];
@@ -9944,7 +9944,7 @@ void BotPrintTalkMessage (char *fmt, ...)
 	}
 }
 
-void BotPrintTalkMessageOne ( edict_t *pClient, char *fmt, ... )
+void BotPrintTalkMessageOne ( edict_t *pClient, const char *fmt, ... )
 {
 	va_list argptr; 
 	static char string[1024];
@@ -9982,7 +9982,7 @@ void BotFile_Write ( char *string )
 	}
 }
 
-void BotMessage (edict_t *pEntity, int errorlevel, char *fmt, ...) 
+void BotMessage (edict_t *pEntity, int errorlevel, const char *fmt, ...) 
 { 
 	va_list argptr; 
 	static char string[1024];
@@ -11230,7 +11230,7 @@ BOOL BotFunc_BreakableIsEnemy ( edict_t *pBreakable, edict_t *pEdict )
 	return FALSE;
 }
 
-edict_t *BotFunc_FindRandomEntity ( char *szClassname )
+edict_t *BotFunc_FindRandomEntity ( const char *szClassname )
 // find a random entity with classname
 {
 	dataUnconstArray<edict_t *> theEntities;
@@ -11586,7 +11586,7 @@ void CBot :: RepairSentry ( int iNewScheduleId )
 		
 		/*if ( sentry == NULL )
 		{
-			char *classname[1] = {"building_sentrygun"};
+			const char *classname[1] = {"building_sentrygun"};
 			
 			// get nearest sentry
 			sentry = UTIL_FindNearestEntity(classname,1,m_vSentry,200.0,FALSE);
@@ -11751,7 +11751,7 @@ void CBot :: DoTasks ()
 				m_CurrentTask->SetTimeToComplete(RANDOM_FLOAT(8.0,10.0));
 
 				// look for current sentries around player and ignore it for finding my sentry
-				//char *classname[1] = {"building_sentrygun"};
+				//const char *classname[1] = {"building_sentrygun"};
 
 				//m_CurrentTask->SetEdict(UTIL_FindNearestEntity(classname,1,pev->origin,200.0,TRUE));
 
@@ -11769,7 +11769,7 @@ void CBot :: DoTasks ()
 
 					//m_vSentry = pev->origin;
 					
-					//char *classname[1] = {"building_sentrygun"};
+					//const char *classname[1] = {"building_sentrygun"};
 					
 					//m_pSentry.Set(UTIL_FindNearestEntity(classname,1,m_CurrentTask->TaskVector(),100.0,TRUE,m_CurrentTask->TaskEdict()));
 					
@@ -11785,7 +11785,7 @@ void CBot :: DoTasks ()
 			{
 				Vector ideal = UTIL_FurthestVectorAroundYaw(this);//m_CurrentTask->TaskVector();
 
-				char *classname[1] = {"building_sentrygun_base"};
+				const char *classname[1] = {"building_sentrygun_base"};
 
 				edict_t *sentry = UTIL_FindNearestEntity(classname,1,pev->origin,120.0,TRUE);
 

@@ -81,7 +81,7 @@
 extern char *g_argv;
 extern CBotGlobals gBotGlobals;
 
-char *name_in_msg = "%n";
+const char *name_in_msg = "%n";
 
 /* anonym001 */
 #ifndef min
@@ -689,8 +689,9 @@ void HAL_InitializeDictionary (HAL_DICTIONARY *dictionary)
 {
    // this function adds dummy words to the dictionary
 
-   HAL_STRING word = { 7, "<ERROR>" };
-   HAL_STRING end = { 5, "<FIN>" };
+	//Added explicit casts to char*. - Solokiller
+   HAL_STRING word = { 7, const_cast<char*>( "<ERROR>" ) };
+   HAL_STRING end = { 5, const_cast<char*>( "<FIN>" ) };
 
    (void) HAL_AddWord (dictionary, word);
    (void) HAL_AddWord (dictionary, end);

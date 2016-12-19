@@ -1678,8 +1678,8 @@ void BotFunc_InitProfile ( bot_profile_t *bpBotProfile )
 void BotFunc_WriteProfile ( FILE *fp, bot_profile_t *bpBotProfile )
 // Writes a profile onto file
 {
-	char *szTag;
-	char *szToWrite;
+	const char *szTag;
+	const char *szToWrite;
 	int *iToWrite;
 	
 	int i = 0;
@@ -2157,7 +2157,7 @@ edict_t *BotFunc_NS_MarineBuild ( int iUser3, const char *szClassname, Vector vO
 	if ( iUser3 == AVH_USER3_RESTOWER )
 	{
 		// find nearest struct resource fountain
-		char *classname[1] = {"func_resource"};
+		const char *classname[1] = {"func_resource"};
 		
 		edict_t *pResource = UTIL_FindNearestEntity(classname,1,vOrigin,200,FALSE);
 		

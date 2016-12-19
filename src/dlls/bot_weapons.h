@@ -467,7 +467,7 @@ public:
 		return 0;
 	}
 
-	inline char *GetClassname ( void )
+	inline const char *GetClassname ( void )
 	{
 		return m_szClassname;
 	}
@@ -518,7 +518,7 @@ private:
 
 	//weapon_preset_t *m_pWeaponPreset;
 
-	char *m_szClassname;
+	const char *m_szClassname;
 
 	BOOL m_bRegistered; // Registered by the mod.
 
@@ -824,7 +824,7 @@ public:
 		m_iClip = iClip;
 	}
 
-    char *GetClassname ( void )
+   const  char *GetClassname ( void )
 	{
 		if ( m_pWeaponInfo )
 			return m_pWeaponInfo->GetClassname();
