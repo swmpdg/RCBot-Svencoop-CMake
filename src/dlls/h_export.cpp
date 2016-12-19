@@ -128,11 +128,12 @@ void _fini (void)
 
 #endif // NOT LINUX
 
+//TODO: this doesn't need 3 different declarations. - Solokiller
 #ifndef __linux__
 #ifdef __BORLANDC__
 extern "C" DLLEXPORT void EXPORT GiveFnptrsToDll(enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals)
 #else
-void GIVEFNPTRS_DLLEXPORT GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals )
+extern "C" void GIVEFNPTRS_DLLEXPORT GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals )
 #endif // __BORLANDC__
 #else // ELSE __linux__
 extern "C" DLLEXPORT void GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals )
