@@ -10,8 +10,8 @@
 #define ENGINE_H
 
 // engine prototypes (from engine\eiface.h)...
-int pfnPrecacheModel( char* s );
-int pfnPrecacheSound( char* s );
+int pfnPrecacheModel( const char* s );
+int pfnPrecacheSound( const char* s );
 void pfnSetModel( edict_t *e, const char *m );
 int pfnModelIndex( const char *m );
 int pfnModelFrames( int modelIndex );
@@ -119,7 +119,7 @@ int pfnNumberOfEntities( void );
 char* pfnGetInfoKeyBuffer( edict_t *e );
 char* pfnInfoKeyValue( char *infobuffer, const char *key );
 void pfnSetKeyValue( char *infobuffer, char *key, char *value );
-void pfnSetClientKeyValue( int clientIndex, char *infobuffer, char *key, char *value );
+void pfnSetClientKeyValue( int clientIndex, char *infobuffer, const char *key, const char *value );
 int pfnIsMapValid( char *filename );
 void pfnStaticDecal( const float *origin, int decalIndex, int entityIndex, int modelIndex );
 int pfnPrecacheGeneric( char* s );

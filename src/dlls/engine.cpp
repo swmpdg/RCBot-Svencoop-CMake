@@ -83,7 +83,7 @@ void pfnAlertMessage( ALERT_TYPE atype, char *szFmt, ... )
 #endif
 }
 */
-int pfnPrecacheModel(char* s)
+int pfnPrecacheModel(const char* s)
 {
     if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnPrecacheModel: %s\n",s); fclose(fp); }
     
@@ -93,7 +93,7 @@ int pfnPrecacheModel(char* s)
     return (*g_engfuncs.pfnPrecacheModel)(s);
 #endif
 }
-int pfnPrecacheSound(char* s)
+int pfnPrecacheSound(const char* s)
 {
     if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnPrecacheSound: %s\n",s); fclose(fp); }
     
@@ -1391,7 +1391,7 @@ void pfnSetKeyValue(char *infobuffer, char *key, char *value)
     (*g_engfuncs.pfnSetKeyValue)(infobuffer, key, value);
 #endif
 }
-void pfnSetClientKeyValue(int clientIndex, char *infobuffer, char *key, char *value)
+void pfnSetClientKeyValue(int clientIndex, char *infobuffer, const char *key, const char *value)
 {
 	edict_t *pEdict = INDEXENT(clientIndex);
 

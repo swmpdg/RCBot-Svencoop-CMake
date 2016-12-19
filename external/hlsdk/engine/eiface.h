@@ -98,8 +98,8 @@ typedef struct
 // Engine hands this to DLLs for functionality callbacks
 typedef struct enginefuncs_s
 {
-	int			(*pfnPrecacheModel)			(char* s);
-	int			(*pfnPrecacheSound)			(char* s);
+	int			(*pfnPrecacheModel)			(const char* s);
+	int			(*pfnPrecacheSound)			(const char* s);
 	void		(*pfnSetModel)				(edict_t *e, const char *m);
 	int			(*pfnModelIndex)			(const char *m);
 	int			(*pfnModelFrames)			(int modelIndex);
@@ -221,7 +221,7 @@ typedef struct enginefuncs_s
 	char*		(*pfnGetInfoKeyBuffer)		(edict_t *e);	// passing in NULL gets the serverinfo
 	char*		(*pfnInfoKeyValue)			(char *infobuffer, const char *key);
 	void		(*pfnSetKeyValue)			(char *infobuffer, char *key, char *value);
-	void		(*pfnSetClientKeyValue)		(int clientIndex, char *infobuffer, char *key, char *value);
+	void		(*pfnSetClientKeyValue)		(int clientIndex, char *infobuffer, const char *key, const char *value);
 	int			(*pfnIsMapValid)			(char *filename);
 	void		(*pfnStaticDecal)			( const float *origin, int decalIndex, int entityIndex, int modelIndex );
 	int			(*pfnPrecacheGeneric)		(char* s);
@@ -320,9 +320,9 @@ typedef struct enginefuncs_s
 // Passed to pfnKeyValue
 typedef struct KeyValueData_s
 {
-	char	*szClassName;	// in: entity classname
-	char	*szKeyName;		// in: name of key
-	char	*szValue;		// in: value of key
+	const char	*szClassName;	// in: entity classname
+	const char	*szKeyName;		// in: name of key
+	const char	*szValue;		// in: value of key
 #ifdef HLSDK_3_2_OLD_EIFACE
 	long	fHandled;		// out: DLL sets to true if key-value pair was understood
 #else
