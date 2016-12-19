@@ -92,7 +92,7 @@ void do_link_ent(ENTITY_FN *pfnEntity, int *missing, const char *entStr,
 		if(missing) \
 			return; \
 		if(!pfnEntity) { \
-			if(!(findp=Plugins->find_match(pluginName))) { \
+			if((findp=Plugins->find_match(pluginName)) == NULL) { \
 				META_ERROR("Couldn't find loaded plugin '%s' for plugin entity '%s'", pluginName, entStr); \
 				missing=1; \
 				return; \

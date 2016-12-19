@@ -2094,7 +2094,7 @@ void HudText :: SayMessage ( const char *message, edict_t *pPlayer )
 
 void HudText :: InitMessage ( const char *message )
 {
-	short int length,i;
+	size_t length,i;
 
 	strncpy(m_sMessage,message,HUD_TEXT_LENGTH - 1);
 

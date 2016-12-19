@@ -6244,7 +6244,7 @@ BOOL CBot :: UpdateVisibles ( void )
 	if ( pos != NULL )
 	{
 		// quick visible checking
-		pvs = ENGINE_SET_PVS ( (float *)&(pos->getVector()) );
+		pvs = ENGINE_SET_PVS ( pos->getVector() );
 
 		if( ENGINE_CHECK_VISIBILITY(m_pEdict,pvs) )
 		{
@@ -9786,8 +9786,6 @@ BOOL BotFunc_IsLongRangeWeapon(int iId)
 	default:
 		return FALSE;
 	}
-
-	return FALSE;
 }
 
 

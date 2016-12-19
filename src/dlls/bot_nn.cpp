@@ -312,9 +312,8 @@ void NNLayer :: freeMemory ()
 }
 
 NNGATrained::NNGATrained (int iNumHiddenLayers, int iNumInputs, int iNumNeuronsPerHiddenLayer, int iNumOutputs )
-{
-	NN::NN(iNumHiddenLayers,iNumInputs,iNumNeuronsPerHiddenLayer,iNumOutputs);
-	
+	: NN( iNumHiddenLayers, iNumInputs, iNumNeuronsPerHiddenLayer, iNumOutputs )
+{	
 	m_pGA = new CGA(12);
 	m_pInd = new CBotGAValues();
 	

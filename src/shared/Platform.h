@@ -29,6 +29,8 @@
 
 #include <malloc.h> // _alloca
 
+#undef GetMessage
+
 #define strupr _strupr
 #define stricmp _stricmp
 #define strnicmp _strnicmp
