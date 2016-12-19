@@ -114,4 +114,13 @@ void do_link_ent(ENTITY_FN *pfnEntity, int *missing, const char *entStr,
 		(*pfnEntity)(pev); \
 	}
 
+//TODO: move this to another header - Solokiller
+#ifndef RCBOT_META_BUILD
+#if defined(_WIN32) && !defined(__CYGWIN__)
+extern HINSTANCE h_Library;
+#else
+extern void *h_Library;
+#endif
+#endif
+
 #endif /* LINK_ENT_H */

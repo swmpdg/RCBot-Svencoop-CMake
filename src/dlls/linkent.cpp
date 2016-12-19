@@ -38,6 +38,9 @@
 
 #include "linkent.h"	// LINK_ENTITY_TO_GAME
 
+ /// Only for NON-METAMOD build only...
+#ifndef RCBOT_META_BUILD
+
 // Function to perform common code of LINK_ENTITY_TO_GAME, rather than
 // duplicating the code in ~2000 expanded macros.  Based on code from Jussi
 // Kivilinna <kijuhe00@students.oamk.fi>.
@@ -46,18 +49,34 @@ void do_link_ent(ENTITY_FN *pfnEntity, int *missing, const char *entStr,
 		entvars_t *pev)
 {;
 	if(*missing) {
+#if 0
 		META_DEBUG(9, ("Skipping entity '%s'; was previously found missing", entStr));
+#endif
 		return;
 	}
 	if(!*pfnEntity) {
+#if 0
 		META_DEBUG(9, ("Looking up game entity '%s'", entStr));
-		*pfnEntity = (ENTITY_FN) DLSYM(GameDLL.handle, entStr);
+#endif
+		*pfnEntity = (ENTITY_FN) DLSYM(
+#if 0
+			GameDLL.handle
+#else
+			h_Library
+#endif
+			, entStr);
 	}
 	if(!*pfnEntity) {
+#if 0
 		META_ERROR("Couldn't find game entity '%s' in game DLL '%s': %s", entStr, GameDLL.name, DLERROR());
+#endif
 		*missing=1;
 		return;
 	}
+#if 0
 	META_DEBUG(8, ("Linking game entity '%s'", entStr));
+#endif
 	(*pfnEntity)(pev);
 }
+
+#endif
