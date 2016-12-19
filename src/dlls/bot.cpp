@@ -7968,7 +7968,7 @@ void CBot :: SetViewAngles ( const Vector &pOrigin )
 	//	iCurrentTask = m_CurrentTask->Task();
 	
 	vAngles.z = 0;
-	pev->v_angle.z = pev->v_angle.z = 0;
+	pev->v_angle.z = 0;
 	
 	float zComp = m_vMoveToVector.z - pev->origin.z;
 	

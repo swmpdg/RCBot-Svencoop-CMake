@@ -1311,7 +1311,7 @@ void PM_Init ( struct playermove_s *ppmove )
 char PM_FindTextureType( char *name )
 {
 #ifdef RCBOT_META_BUILD
-	RETURN_META_VALUE(MRES_IGNORED,NULL);
+	RETURN_META_VALUE(MRES_IGNORED,0);
 #else
 	return (*other_gFunctionTable.pfnPM_FindTextureType)(name);
 #endif
@@ -1640,7 +1640,7 @@ void BotFunc_InitProfile ( bot_profile_t *bpBotProfile )
 {
 	bpBotProfile->m_szModel = NULL;
 	bpBotProfile->m_iClass = -1;
-	bpBotProfile->m_FadePercent = NULL;
+	bpBotProfile->m_FadePercent = 0;
 	bpBotProfile->m_GorgePercent = 0; 
 	bpBotProfile->m_iFavMod = 0;
 	bpBotProfile->m_iFavTeam = TEAM_AUTOTEAM; 
@@ -2295,7 +2295,7 @@ void CBotCam :: Think ()
 		if ( bNotAlive )
 		{
 			float fDistance;
-			float fNearest;
+			float fNearest = INT_MAX;
 			
 			// think about next bot to view etc
 			m_fNextChangeBotTime = gpGlobals->time + RANDOM_FLOAT(7.5,10.0);

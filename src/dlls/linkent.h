@@ -87,7 +87,7 @@ void do_link_ent(ENTITY_FN *pfnEntity, int *missing, const char *entStr,
 		static ENTITY_FN pfnEntity = NULL; \
 		static int missing=0; \
 		const char *entStr; \
-		MPlugin *findp; \
+		MPlugin *findp = NULL; \
 		entStr = STRINGIZE(entityName, 0); \
 		if(missing) \
 			return; \

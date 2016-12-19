@@ -1609,7 +1609,7 @@ int BotHALBabble (CBot *pBot, HAL_DICTIONARY *keys, HAL_DICTIONARY *words)
    int symbol = 0;
 
    if ( !pBot || !pBot->IsUsed())
-      return NULL; // reliability check
+      return 0; // reliability check
 
    // select the longest available context
    for (i = 0; i <= pBot->m_Profile.m_HAL->bot_model->order; ++i)
