@@ -691,7 +691,7 @@ float UTIL_PitchAngleBetweenOrigin(entvars_t *pev,Vector vOrigin)
 {
 // UTIL_IsFacingEntity(entvars_t *pev, entvars_t *pevEntity)
 	//{
-	/*
+	
 	Vector vMaxAngles;
 	Vector vMinAngles;
 	Vector vPevOrigin;
