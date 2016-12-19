@@ -4548,6 +4548,8 @@ void CBot :: LookForNewTasks ( void )
                     {
                         switch ( action )//iThingsICanDo.Random() )
                         {
+						case BOT_CAN_NONE: break;
+
                         case BOT_CAN_BUILD_HIVE:
                             if ( bNotCombatMap )
                             {
@@ -4617,6 +4619,16 @@ void CBot :: LookForNewTasks ( void )
 							
                             AddTask(CBotTask(BOT_TASK_HEAL_PLAYER,iNewScheduleId,pNearestHealablePlayer));
                             break;
+
+							//TODO: handle these? - Solokiller
+						case BOT_CAN_BUILD_SENTRY:
+						case BOT_CAN_UPGRADE_SENTRY:
+						case BOT_CAN_BUILD_TELE_ENTRANCE:
+						case BOT_CAN_BUILD_TELE_EXIT:
+						case BOT_CAN_BUILD_DISPENSER:
+						case BOT_CAN_GET_METAL:
+						case BOT_CAN_REPAIR_TELE_EXIT:
+							break;
                         }
                     }
                     else
@@ -7550,6 +7562,10 @@ void CBot :: WorkViewAngles ( void )
 	case BOT_LOOK_TASK_FACE_TEAMMATE:
 		//SetViewAngles(m_CurrentLookTask.vLookVec); 
 		break;
+
+	case BOT_LOOK_TASK_FACE_ENTITY:
+		break;
+
 	case BOT_LOOK_TASK_FACE_TASK_VECTOR:
 		if ( m_CurrentTask )
 			SetViewAngles(m_CurrentTask->TaskVector());
@@ -10588,6 +10604,7 @@ Vector CBotSquad :: GetFormationVector ( edict_t *pEdict )
 	// going to have members on either side.
 	switch ( m_theDesiredFormation ) 
 	{
+	case SQUAD_FORM_NONE: break;
 	case SQUAD_FORM_VEE:
 		{
 			if ( iMod )			

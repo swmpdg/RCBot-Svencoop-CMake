@@ -2399,6 +2399,7 @@ void CBotCam :: Think ()
 
     switch ( m_iState )
     {
+	case BOTCAM_NONE: break;
     case BOTCAM_BOT:
         {
 			if ( m_pCurrentBot->m_pEnemy )
