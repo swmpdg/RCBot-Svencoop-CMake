@@ -163,7 +163,7 @@ public:
 	// make new generation
 	void epoch ();
 
-	inline void setSize ( int iSize ) { m_iMaxPopSize = iSize; }	
+	inline void setSize ( unsigned int iSize ) { m_iMaxPopSize = iSize; }	
 
 	void addToPopulation ( IIndividual *individual );
 
@@ -184,8 +184,8 @@ public:
 
 	void setPopType(int t){m_iPopType=t;}
 
-	int m_iMaxPopSize;
-	static const int g_iDefaultMaxPopSize;
+	unsigned int m_iMaxPopSize;
+	static const unsigned int g_iDefaultMaxPopSize;
 	static const float g_fCrossOverRate;
 	static const float g_fMutateRate;
 	static const float g_fMaxPerturbation;

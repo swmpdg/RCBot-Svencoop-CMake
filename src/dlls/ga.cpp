@@ -41,7 +41,7 @@
 
 #include "ga.h"
 
-const int CGA :: g_iDefaultMaxPopSize = 16;
+const unsigned int CGA :: g_iDefaultMaxPopSize = 16;
 const float CGA :: g_fCrossOverRate = 0.7f;
 const float CGA :: g_fMutateRate = 0.1f;
 const float CGA :: g_fMaxPerturbation = 0.3f;
@@ -115,7 +115,7 @@ void CPopulation :: save ( FILE *bfp )
 
 	fwrite(&iSize,sizeof(int),1,bfp);
 
-	for ( int i = 0; i < iSize; i ++ )
+	for ( unsigned int i = 0; i < iSize; i ++ )
 		m_theIndividuals[i]->save(bfp);
 }
 
@@ -136,13 +136,13 @@ void CPopulation :: load ( FILE *bfp, int chromosize, int type )
 		return;
 	}
 
-	fread(&iSize,sizeof(int),1,bfp);
+	fread(&iSize,sizeof( iSize ),1,bfp);
 
 	IIndividual *pVals;
 
 	m_theIndividuals.clear();
 
-	for ( int i = 0; i < iSize; i ++ )
+	for ( unsigned int i = 0; i < iSize; i ++ )
 	{
 		// reliability check
 		if ( feof(bfp) )
