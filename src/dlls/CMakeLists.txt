@@ -26,18 +26,38 @@ else()
 	set( RCBOT_META_BUILD )
 endif()
 
-#Generate or update linkgame.cpp
-MESSAGE( STATUS "Generating linkgame.cpp..." )
+if( NOT RCBOT_IS_METAMOD )
+	#Generate or update linkgame.cpp
+	MESSAGE( STATUS "Generating linkgame.cpp..." )
 
-if( WIN32 )
-	set( MKLINKGAME_COMMAND "perl mklinkgame.pl" )
+	if( WIN32 )
+		#Check if Perl is installed.
+		find_program( PERL perl )
+		
+		if( NOT PERL )
+			MESSAGE( FATAL_ERROR "Perl must be installed in order to run mklinkgame.pl\nSee https://www.perl.org" )
+		endif()
+		
+		set( MKLINKGAME_COMMAND perl )
+		set( MKLINKGAME_ARGS "mklinkgame.pl" )
+	else()
+		set( MKLINKGAME_COMMAND )
+		set( MKLINKGAME_ARGS "./mklinkgame.sh" )
+	endif()
+
+	#The command and arguments need to be separate in order for the command itself to be picked up correctly.
+	execute_process( COMMAND ${MKLINKGAME_COMMAND} ${MKLINKGAME_ARGS}
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+		OUTPUT_VARIABLE MKLINKGAME_OUTPUT
+		ERROR_VARIABLE MKLINKGAME_OUTPUT
+	)
+
+	MESSAGE( STATUS ${MKLINKGAME_OUTPUT} )
+
+	MESSAGE( STATUS "Done." )
 else()
-	set( MKLINKGAME_COMMAND "shell ./mklinkgame.sh" )
+	MESSAGE( STATUS "Not generating linkgame.cpp due to Metamod build" )
 endif()
-
-execute_process( COMMAND ${MKLINKGAME_COMMAND} )
-
-MESSAGE( STATUS "Done." )
 
 #Add plugin sources here, or using add_subdirectory.
 add_sources(
