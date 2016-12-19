@@ -4329,7 +4329,7 @@ public:
 		{
 			l_RetString = s_tempStack.ChooseFromStack();
 			
-			if ( strcmpi(l_RetString,szString) == 0 )
+			if ( stricmp(l_RetString,szString) == 0 )
 			{
 				// Fool the pointer in the tempstack so it doesn't free
 				// memory we still want to use.
@@ -5124,7 +5124,7 @@ public:
 
 	BOOL IsForMod ( const char *szFolder )
 	{
-		return ( strcmpi(szFolder,m_szModFolder) == 0 );
+		return ( stricmp(szFolder,m_szModFolder) == 0 );
 	}
 
 	int GetModId ( void )

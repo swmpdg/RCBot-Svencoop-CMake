@@ -1294,7 +1294,7 @@ void BotClient_NS_HudText :: execute (void *p, int iIndex)
 			length = strlen(msg);
 
 			// If a team has won (used to say "one" duhhh), round is over
-			if ( !strcmpi(&msg[length-3],"Won") )
+			if ( !stricmp(&msg[length-3],"Won") )
 			{
 				BotMessage(NULL,0,"-----------\nRound Restart\n---------");
 
