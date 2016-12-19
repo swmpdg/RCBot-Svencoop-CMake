@@ -63,4 +63,13 @@ typedef float vec_t;				// needed before including progdefs.h
 // Shared header between the client DLL and the game DLLs
 #include "cdll_dll.h"
 
+//TODO: replace these usages - Solokiller
+#ifndef WIN32
+typedef int BOOL;
+#define TRUE 1
+#define FALSE 0
+typedef unsigned long ULONG;
+typedef byte BYTE;
+#endif
+
 #endif //EXTDLL_H
