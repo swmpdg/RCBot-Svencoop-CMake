@@ -21,6 +21,7 @@
 #define CDLL_DLL_H
 
 //#ifdef RCBOT_TS_BUILD
+//TODO: increase to 128 for SC, needs to use different means of getting weapons. - Solokiller
 	#define MAX_WEAPONS	37		// ??? 37 for TS
 //#else
 //	#define MAX_WEAPONS	32

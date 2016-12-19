@@ -556,6 +556,7 @@ int CBotWeapons :: GetBestWeaponId( CBot *pBot, edict_t *pEnemy )
 		switch ( gBotGlobals.m_iCurrentMod )
 		{
 		case MOD_SVENCOOP:
+			//TODO: Sven Co-op moved the GL to the M16 - Solokiller
 			if ( FStrEq("func_breakable",STRING(pEnemy->v.classname)) )
 			{
 				if ( pEnemy->v.spawnflags & 512 )

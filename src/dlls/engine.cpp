@@ -1082,7 +1082,8 @@ int pfnRegUserMsg(const char *pszName, int iSize)
 
 	extern plugin_info_t Plugin_info;
 
-	//msg = GET_USER_MSG_ID(&Plugin_info, pszName, &iSize);
+	//TODO: should this be called (was commented out) - Solokiller
+	msg = GET_USER_MSG_ID(&Plugin_info, pszName, &iSize);
 #else
     
     msg = (*g_engfuncs.pfnRegUserMsg)(pszName, iSize);
