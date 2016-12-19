@@ -105,7 +105,7 @@ int pfnPrecacheSound(const char* s)
 }
 void pfnSetModel(edict_t *e, const char *m)
 {
-    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnSetModel: edict=%x %s\n",e,m); fclose(fp); }
+    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnSetModel: edict=%p %s\n",e,m); fclose(fp); }
     
 #ifdef RCBOT_META_BUILD
     RETURN_META(MRES_IGNORED);
@@ -134,7 +134,7 @@ int pfnModelFrames(int modelIndex)
 }
 void pfnSetSize(edict_t *e, const float *rgflMin, const float *rgflMax)
 {
-    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnSetSize: %x\n",e); fclose(fp); }
+    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnSetSize: %p\n",e); fclose(fp); }
 #ifdef RCBOT_META_BUILD
     RETURN_META(MRES_IGNORED);
 #else
@@ -302,7 +302,7 @@ edict_t* pfnCreateEntity(void)
     RETURN_META_VALUE(MRES_IGNORED,NULL);
 #else
 	edict_t *pent = (*g_engfuncs.pfnCreateEntity)();
-    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnCreateEntity: %x\n",pent); fclose(fp); }
+    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnCreateEntity: %p\n",pent); fclose(fp); }
     return pent;
 #endif
 	
@@ -315,7 +315,7 @@ void pfnRemoveEntity(edict_t* e)
     if (debug_engine)
     {
         fp=fopen("bot.txt","a");
-        fprintf(fp,"pfnRemoveEntity: %x\n",e);
+        fprintf(fp,"pfnRemoveEntity: %p\n",e);
         if (e->v.model != 0)
             fprintf(fp," model=%s\n", STRING(e->v.model));
         fclose(fp);
@@ -335,7 +335,7 @@ edict_t* pfnCreateNamedEntity(int className)
 	    
     edict_t *pent = (*g_engfuncs.pfnCreateNamedEntity)(className);
 
-	if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnCreateNamedEntity: edict=%x name=%s\n",pent,STRING(className)); fclose(fp); }
+	if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnCreateNamedEntity: edict=%p name=%s\n",pent,STRING(className)); fclose(fp); }
 
 	
 
@@ -1330,7 +1330,7 @@ void pfnSetClientMaxspeed(const edict_t *pEdict, float fNewMaxspeed)
 		pBot->m_fMaxSpeed = fNewMaxspeed;
 	}
 
-    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnSetClientMaxspeed: edict=%x %f\n",pEdict,fNewMaxspeed); fclose(fp); }
+    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnSetClientMaxspeed: edict=%p %f\n",pEdict,fNewMaxspeed); fclose(fp); }
 #ifdef RCBOT_META_BUILD
     RETURN_META(MRES_IGNORED);
 #else
@@ -1495,7 +1495,7 @@ int pfnGetPlayerUserId(edict_t *e )
 {
     if (gpGlobals->deathmatch)
     {
-        if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnGetPlayerUserId: %x\n",e); fclose(fp); }       
+        if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnGetPlayerUserId: %p\n",e); fclose(fp); }       
     }
     
 #ifdef RCBOT_META_BUILD
@@ -1565,7 +1565,7 @@ unsigned int pfnGetPlayerWONId(edict_t *e)
 		}
 	}
 
-    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnGetPlayerWONId: %x\n",e); fclose(fp); }
+    if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnGetPlayerWONId: %p\n",e); fclose(fp); }
 #ifdef RCBOT_META_BUILD
     RETURN_META_VALUE(MRES_IGNORED,0);
 #else

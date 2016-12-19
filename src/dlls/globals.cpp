@@ -71,7 +71,8 @@ extern CWaypointLocations WaypointLocations;
 extern int debug_engine;
 
 extern FILE *fpMapConfig;
-static FILE *fp;
+//TODO: shouldn't be using a global for this - Solokiller
+static FILE *g_pFile = NULL;
 /*
 void ReadRCBotFolder ( void )
 {
@@ -156,7 +157,7 @@ BOOL CBotGlobals :: NetMessageStarted ( int msg_dest, int msg_type, const float 
 		
 		index = -1;
 		
-		if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnMessageBegin: edict=%x dest=%d type=%d\n",ed,msg_dest,msg_type); fclose(fp); }
+		if (debug_engine) { g_pFile =fopen("bot.txt","a"); fprintf( g_pFile,"pfnMessageBegin: edict=%p dest=%d type=%d\n",ed,msg_dest,msg_type); fclose( g_pFile ); }
 		
 		m_CurrentMessage = NULL;
 		m_iCurrentMessageState = 0;

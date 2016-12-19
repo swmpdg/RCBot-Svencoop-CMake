@@ -63,8 +63,6 @@
 #include <queue>
 using namespace std;
 
-static FILE *fp;
-
 extern WAYPOINTS waypoints;//[MAX_WAYPOINTS];
 extern CWaypointLocations WaypointLocations;
 extern CBotGlobals gBotGlobals;

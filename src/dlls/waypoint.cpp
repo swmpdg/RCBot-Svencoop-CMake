@@ -879,12 +879,14 @@ void WaypointFree(void)
 {
    for (int i=0; i < MAX_WAYPOINTS; i++)
    {
-      int count = 0;
-
       if (paths[i])
       {
          PATH *p = paths[i];
          PATH *p_next;
+
+#ifdef _DEBUG
+		 int count = 0;
+#endif
 
          while (p)  // free the linked list
          {
@@ -934,10 +936,13 @@ void WaypointAddPath(short int add_index, short int path_index)
 {
    PATH *p, *prev;
    int i;
-   int count = 0;
 
    p = paths[add_index];
    prev = NULL;
+
+#ifdef _DEBUG
+   int count = 0;
+#endif
 
    // find an empty slot for new path_index...
    while (p != NULL)
@@ -996,7 +1001,9 @@ void WaypointDeletePath(short int del_index)
    {
       p = paths[index];
 
-      int count = 0;
+#ifdef _DEBUG
+	  int count = 0;
+#endif
 
       // search linked list for del_index...
       while (p != NULL)
@@ -1030,9 +1037,12 @@ void WaypointDeletePath(short int path_index, short int del_index)
 {
    PATH *p;
    int i;
-   int count = 0;
 
    p = paths[path_index];
+
+#ifdef _DEBUG
+   int count = 0;
+#endif
 
    // search linked list for del_index...
    while (p != NULL)
@@ -1064,7 +1074,6 @@ void WaypointDeletePath(short int path_index, short int del_index)
 int WaypointFindPath(PATH **pPath, int *path_index, int waypoint_index, int team)
 {
    int index;
-   int count = 0;
 
    if (*pPath == NULL)
    {
@@ -1078,6 +1087,10 @@ int WaypointFindPath(PATH **pPath, int *path_index, int waypoint_index, int team
 
       *pPath = (*pPath)->next;  // go to next node in linked list
    }
+
+#ifdef _DEBUG
+   int count = 0;
+#endif
 
    while (*pPath != NULL)
    {
@@ -1752,7 +1765,6 @@ void WaypointAddAiming(edict_t *pEntity)
 void WaypointDelete(CClient *pClient)
 {
    int index;
-   int count = 0;
 
    edict_t *pEntity;
 
@@ -1813,6 +1825,10 @@ void WaypointDelete(CClient *pClient)
    {
       PATH *p = paths[index];
       PATH *p_next;
+
+#ifdef _DEBUG
+	  int count = 0;
+#endif
 
       while (p)  // free the linked list
       {
