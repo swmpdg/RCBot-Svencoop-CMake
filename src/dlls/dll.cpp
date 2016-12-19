@@ -1218,22 +1218,22 @@ void ParmsChangeLevel( void )
 
 const char *GetGameDescription( void )
 {
-	try
-	{
+	//try
+	//{
 #ifdef RCBOT_META_BUILD
 	RETURN_META_VALUE(MRES_IGNORED, NULL);
 #else
 	return (*other_gFunctionTable.pfnGetGameDescription)();
 #endif
-	}
-
-	catch (...)
-	{
-		BotMessage(NULL,2,"Error: bot detected you are running the wrong Rcbot DLL file (e.g. metamod instead of standalone)");
-		//exit(0);
-	}
-
-	return NULL;
+	//}
+	//
+	//catch (...)
+	//{
+	//	BotMessage(NULL,2,"Error: bot detected you are running the wrong Rcbot DLL file (e.g. metamod instead of standalone)");
+	//	//exit(0);
+	//}
+	//
+	//return NULL;
 }
 
 void PlayerCustomization( edict_t *pEntity, customization_t *pCust )

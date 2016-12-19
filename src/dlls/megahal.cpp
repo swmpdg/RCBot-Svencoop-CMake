@@ -658,8 +658,8 @@ int HAL_CompareWords (HAL_STRING word1, HAL_STRING word2)
    register int i;
    int bound;
    
-   try
-   {
+   //try
+   //{
 	   
 	   bound = min (word1.length, word2.length);
 	   
@@ -667,11 +667,11 @@ int HAL_CompareWords (HAL_STRING word1, HAL_STRING word2)
 		   if (toupper (word1.word[i]) != toupper (word2.word[i]))
 			   return ((int) (toupper (word1.word[i]) - toupper (word2.word[i])));
 		   
-   }
-   catch (...)
-   {
-	   BotMessage(NULL,2,"First chance exception in HAL_CompareWords()\r\n(May be a problem with HAL Files)");
-   }
+   //}
+   //catch (...)
+   //{
+	//   BotMessage(NULL,2,"First chance exception in HAL_CompareWords()\r\n(May be a problem with HAL Files)");
+   //}
    if (word1.length < word2.length)
       return (-1);
    else if (word1.length > word2.length)
@@ -1842,30 +1842,30 @@ void HAL_EmptyDictionary (HAL_DICTIONARY *dictionary)
 
    if (dictionary->entry != NULL)
    {	  
-	   try
-	   {
+	   //try
+	   //{
 			free (dictionary->entry);			
-	   }
-
-	   catch (...)
-	   {
-			BotMessage(NULL,0,"exception freeing MegaHAL dictionary entry (Argh!!) Not freeing\n");
-	   }
+	   //}
+	   //
+	   //catch (...)
+	   //{
+		//	BotMessage(NULL,0,"exception freeing MegaHAL dictionary entry (Argh!!) Not freeing\n");
+	   //}
 
 	   dictionary->entry = NULL;
    }
 
    if (dictionary->index != NULL)
    {
-	   try
-	   {
+	   //try
+	   //{
 			free (dictionary->index);
-	   }
-
-	   catch (...)
-	   {
-			BotMessage(NULL,0,"exception freeing MegaHAL dictionary index (Argh!!) Not freeing\n");
-	   }
+	   //}
+	   //
+	   //catch (...)
+	   //{
+		//	BotMessage(NULL,0,"exception freeing MegaHAL dictionary index (Argh!!) Not freeing\n");
+	   //}
 
 	   dictionary->index = NULL;
    }

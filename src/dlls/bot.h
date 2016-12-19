@@ -702,25 +702,15 @@ public:
 	}
 	
 	void Set ( edict_t *pEdict )
-	{
-		try
-		{			
-			m_pEdict = pEdict;
+	{		
+		m_pEdict = pEdict;
 			
-			if ( pEdict )
-			{
-				m_iSerialNumber = m_pEdict->serialnumber;
-			}
-			else					
-				m_iSerialNumber = 0;
-			
-		}
-		
-		catch ( ... )
+		if ( pEdict )
 		{
-			m_pEdict = NULL;
-			m_iSerialNumber = 0;
+			m_iSerialNumber = m_pEdict->serialnumber;
 		}
+		else					
+			m_iSerialNumber = 0;
 	}
 };
 
