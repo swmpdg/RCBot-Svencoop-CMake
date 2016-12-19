@@ -406,6 +406,11 @@ public:
 		this->Init();
 	}
 
+	//Added virtual destructor. - Solokiller
+	virtual ~CWeapon()
+	{
+	}
+
 	void Init ( void )
 	{
 		m_iAmmoIndex1 = -1;

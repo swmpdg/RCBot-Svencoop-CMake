@@ -46,6 +46,11 @@ typedef enum
 class IIndividual
 {
 public:
+	//Added virtual destructor. - Solokiller
+	virtual ~IIndividual()
+	{
+	}
+
 	// get fitness for this individual
 	inline ga_value getFitness () { return m_fFitness; }
 	inline void setFitness ( float fVal ) { m_fFitness = fVal; }
@@ -112,8 +117,15 @@ private:
 class ISelection
 {
 public:
+	//Added virtual destructor. - Solokiller
+	virtual ~ISelection() = 0;
+
 	virtual IIndividual *select ( CPopulation *population ) = 0;
 };
+
+inline ISelection::~ISelection()
+{
+}
 
 class CRouletteSelection : public ISelection
 {

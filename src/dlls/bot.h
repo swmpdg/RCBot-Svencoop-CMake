@@ -4961,6 +4961,11 @@ public:
 		m_szCvarName = NULL;
 	}
 
+	//Added a virtual destructor. - Solokiller
+	virtual ~CBotCvar()
+	{
+	}
+
 	inline const char *GetCommandName ( void )
 	{
 		return m_szCvarName;

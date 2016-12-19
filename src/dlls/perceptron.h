@@ -44,8 +44,15 @@ class CBotGAValues;
 class ITransfer
 {
 public:
+	//Added virtual destructor. - Solokiller
+	virtual ~ITransfer() = 0;
+
 	virtual ga_value transfer ( ga_value netInput ) = 0;
 };
+
+inline ITransfer::~ITransfer()
+{
+}
 
 
 class CSigmoidTransfer : public ITransfer
