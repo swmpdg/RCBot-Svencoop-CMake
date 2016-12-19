@@ -2583,7 +2583,7 @@ edict_t * CTFCCapturePoints :: getCapturePoint ( int group, int goal, int team, 
 		}
 		else
 		{			
-			if ( (group && pGotCap->isForGroup(group)) || (goal && pGotCap->isForGoal(goal)) && pGotCap->isForTeam(team) )
+			if ( (group && pGotCap->isForGroup(group)) || ( (goal && pGotCap->isForGoal(goal)) && pGotCap->isForTeam(team) ) )
 			{
 				if ( gBotGlobals.isMapType(TFC_MAP_CAPTURE_FLAG_MULTIPLE) )
 				{			

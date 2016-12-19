@@ -4033,7 +4033,10 @@ void CBot :: LookForNewTasks ( void )
 			}
 			break;
 		case MOD_TFC:
-			if ( (pEntity->v.flags & FL_CLIENT) && (HasWeapon(TF_WEAPON_MEDIKIT) && (pEntitypev->health < (pEntitypev->max_health*0.5)) && !pNearestHealablePlayer || (fDistance < fNearestHealablePlayerDist)) )
+			if ( (pEntity->v.flags & FL_CLIENT) && 
+				(HasWeapon(TF_WEAPON_MEDIKIT) && 
+				 (pEntitypev->health < (pEntitypev->max_health*0.5)) && 
+				  ( !pNearestHealablePlayer || (fDistance < fNearestHealablePlayerDist) ) ) )
 			{
 				pNearestHealablePlayer = pEntity;
 				fNearestHealablePlayerDist = fDistance;
@@ -4080,7 +4083,11 @@ void CBot :: LookForNewTasks ( void )
 			
 			break;
 		case MOD_SVENCOOP:
-			if ( (pEntity->v.waterlevel < 2) && (pev->waterlevel < 2) && (HasWeapon(SVEN_WEAPON_MEDKIT) && (pEntitypev->health < (pEntitypev->max_health*0.5)) && !pNearestHealablePlayer || (fDistance < fNearestHealablePlayerDist)) )
+			if ( (pEntity->v.waterlevel < 2) && 
+				(pev->waterlevel < 2) && 
+				( HasWeapon(SVEN_WEAPON_MEDKIT) && 
+				   (pEntitypev->health < (pEntitypev->max_health*0.5)) && 
+				  ( !pNearestHealablePlayer || ( fDistance < fNearestHealablePlayerDist) ) ) )
 			{
 				pNearestHealablePlayer = pEntity;
 				fNearestHealablePlayerDist = fDistance;
@@ -6132,11 +6139,11 @@ BOOL CBot :: UpdateVisibles ( void )
 						 (
 						  (bIsGorge || IsMarine()) && gBotGlobals.IsNS()
 						 )||
-						 (
+						 ( (
 						  gBotGlobals.IsMod(MOD_TFC)&&(pev->playerclass==TFC_CLASS_ENGINEER)
 						 ) 
 					   && (m_fLookForBuildableTime < gpGlobals->time)
-					    ) 
+					    ) ) 
 					   );
 	
 	// Trying to do a bit of the list each frame so keep info until we've
@@ -15642,7 +15649,7 @@ void CBot :: DoTasks ()
 								if ( RANDOM_LONG(0,100) < 10 )
 									PrimaryAttack();
 							}
-							else if ( HasWeapon(SVEN_WEAPON_MEDKIT) && !m_pCurrentWeapon || (m_pCurrentWeapon->GetID() != SVEN_WEAPON_MEDKIT) )
+							else if ( HasWeapon(SVEN_WEAPON_MEDKIT) && ( !m_pCurrentWeapon || (m_pCurrentWeapon->GetID() != SVEN_WEAPON_MEDKIT) ) )
 							{
 								SwitchWeapon(SVEN_WEAPON_MEDKIT);
 							}
