@@ -168,7 +168,7 @@ int BotNavigate_AStarAlgo ( CBot *pBot, int iFrom, int iTo, BOOL bContinue )
 	AStarNode *sCurrNodeInfo = NULL; // Info of the current node
 	AStarNode *sSuccNodeInfo = NULL; // Info of the succesor to the current node
 
-	float fMinCost;
+	//float fMinCost;
 	float fOldCost;
 	float fCurCost;
 
@@ -273,7 +273,7 @@ int BotNavigate_AStarAlgo ( CBot *pBot, int iFrom, int iTo, BOOL bContinue )
 
 	int iSuccNodeFlags;
 
-	BOOL m_bIsLerk = ( pBot->IsLerk() );
+	//BOOL m_bIsLerk = ( pBot->IsLerk() );
 
 	int iBotTeam = pBot->GetTeam();
 	BOOL bCanThrowGren = pBot->HasWeapon(VALVE_WEAPON_HANDGRENADE);
@@ -293,7 +293,7 @@ int BotNavigate_AStarAlgo ( CBot *pBot, int iFrom, int iTo, BOOL bContinue )
 
 		iCurrentNode = -1;
 
-		fMinCost = 0;
+		//fMinCost = 0;
 
 		sCurrNodeInfo = sOpenList->top();
 		iCurrentNode = sCurrNodeInfo->m_iWaypoint;
@@ -389,7 +389,7 @@ int BotNavigate_AStarAlgo ( CBot *pBot, int iFrom, int iTo, BOOL bContinue )
 				if ( iSuccNodeFlags & W_FL_PAIN )
 				{
 					edict_t *pent = NULL;
-					BOOL bFound = FALSE;
+					//BOOL bFound = FALSE;
 					edict_t *pNearest = NULL;
 					float fNearestDist = 0;
 
@@ -1699,14 +1699,14 @@ BOOL BotNavigate_UpdateWaypoint ( CBot *pBot )
 	// Wall stick waypoint
 	if ( gBotGlobals.IsNS() && (pBot->IsSkulk() && (pBot->m_iCurrentWaypointFlags & (W_FL_WALL_STICK | W_FL_LADDER)) && (pBot->m_iPrevWaypointIndex != -1)))
 	{		
-		Vector vWptOrigin = WaypointOrigin(pBot->m_iCurrentWaypointIndex);
+		Vector vCurWptOrigin = WaypointOrigin(pBot->m_iCurrentWaypointIndex);
 		Vector vTemp = WaypointOrigin(pBot->m_iPrevWaypointIndex);
 
-		vTemp.z = vWptOrigin.z;
+		vTemp.z = vCurWptOrigin.z;
 
-		Vector vComp = (vWptOrigin - vTemp).Normalize();
+		Vector vComp = ( vCurWptOrigin - vTemp).Normalize();
 
-		pBot->SetMoveVector(vWptOrigin+(vComp*(gBotGlobals.m_fWallStickTol)));
+		pBot->SetMoveVector( vCurWptOrigin +(vComp*(gBotGlobals.m_fWallStickTol)));
 
 		pBot->m_CurrentLookTask = BOT_LOOK_TASK_NEXT_WAYPOINT;
 		//WaypointDrawBeam(gBotGlobals.m_pListenServerEdict,pBot->pev->origin,pBot->m_vMoveToVector,20,10,200,200,200,100,10);
@@ -2087,7 +2087,7 @@ BOOL CheckLift ( CBot *pBot, Vector vCheckOrigin, Vector vCheckToOrigin )
 					}
 					else
 					{
-						BOOL bFail = TRUE;
+						//BOOL bFail = TRUE;
 						
 						// Button not found, see if there is a lift button waypoint nearby
 						
@@ -2105,7 +2105,7 @@ BOOL CheckLift ( CBot *pBot, Vector vCheckOrigin, Vector vCheckToOrigin )
 								const char *szClassnames[3] = {"func_button","button_target","func_rot_button"};
 								
 								// check nearby the lift button waypoint
-								edict_t *pButton = UTIL_FindNearestEntity(szClassnames,3,WaypointOrigin(iWpt),fRange,TRUE);
+								pButton = UTIL_FindNearestEntity(szClassnames,3,WaypointOrigin(iWpt),fRange,TRUE);
 								
 								if ( pButton )
 								{
@@ -2122,7 +2122,7 @@ BOOL CheckLift ( CBot *pBot, Vector vCheckOrigin, Vector vCheckToOrigin )
 									// make sure we update these tasks so we know we are using a lift
 									pBot->m_Tasks.GiveSchedIdDescription(iScheduleId,BOT_SCHED_USE_LIFT);
 									
-									bFail = FALSE;
+									//bFail = FALSE;
 								}
 							}
 						}

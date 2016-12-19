@@ -282,12 +282,12 @@ void CWaypointLocations :: FindNearestInBucket ( int i, int j, int k, const Vect
 		
 		if ( iFailedWpts )
 		{   
-			dataStack<int> tempStack = *iFailedWpts;
+			dataStack<int> tempStack2 = *iFailedWpts;
 			int iWpt;
 			
-			while ( !tempStack.IsEmpty() )
+			while ( !tempStack2.IsEmpty() )
 			{
-				if ( (iWpt = tempStack.ChooseFromStack()) != -1 )
+				if ( (iWpt = tempStack2.ChooseFromStack()) != -1 )
 					g_iFailedWaypoints[iWpt] = 1;
 			}
 		}

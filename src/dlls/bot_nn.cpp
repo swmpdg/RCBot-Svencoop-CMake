@@ -131,7 +131,7 @@ void NN :: getOutputs ( vector<ga_value> *outputs )
 {
 	register unsigned short int i;
 	register unsigned short int j;
-	register unsigned short int w = 0;
+	//register unsigned short int w = 0;
 	
 	outputs->clear();
 

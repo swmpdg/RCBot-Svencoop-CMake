@@ -581,7 +581,7 @@ eBotCvarState CUtilCommand :: action ( CClient *pClient, const char *arg1, const
     else if ( pEntity && FStrEq("search",arg1) )
     {
         edict_t *pEnt = NULL;
-        edict_t *pEntity = pClient->GetPlayer();
+        edict_t *pPlayer = pClient->GetPlayer();
         
         float range = 100;
         
@@ -592,32 +592,31 @@ eBotCvarState CUtilCommand :: action ( CClient *pClient, const char *arg1, const
         
         //fp = fopen("botlog.txt","a");
         
-        while ( (pEnt = UTIL_FindEntityInSphere(pEnt,pEntity->v.origin,range)) != NULL )
+        while ( (pEnt = UTIL_FindEntityInSphere(pEnt, pPlayer->v.origin,range)) != NULL )
         {
-			BotMessage(pEntity,0,"Found: id: %d, classname:%s distance:%0.2f iuser3:%d pclass:%d\niuser1 %d, iuser2 %d, iuser4 %d, euser1 0x%x, euser2 0x%x, model:%s",ENTINDEX(pEnt),STRING(pEnt->v.classname),(EntityOrigin(pEnt) - pEntity->v.origin).Length(),pEnt->v.iuser3,pEnt->v.playerclass,pEnt->v.iuser1,pEnt->v.iuser2,pEnt->v.iuser4,pEnt->v.euser1,pEnt->v.euser2,STRING(pEnt->v.model));
+			BotMessage(pPlayer,0,"Found: id: %d, classname:%s distance:%0.2f iuser3:%d pclass:%d\niuser1 %d, iuser2 %d, iuser4 %d, euser1 0x%x, euser2 0x%x, model:%s",ENTINDEX(pEnt),STRING(pEnt->v.classname),(EntityOrigin(pEnt) - pPlayer->v.origin).Length(),pEnt->v.iuser3,pEnt->v.playerclass,pEnt->v.iuser1,pEnt->v.iuser2,pEnt->v.iuser4,pEnt->v.euser1,pEnt->v.euser2,STRING(pEnt->v.model));
         }
         
         //fclose(fp);
     }
     else if ( pEntity && FStrEq("offsearch",arg1) )
     {
-		char sz[128];
-        edict_t *pEnt = NULL;
-        edict_t *pEntity = pClient->GetPlayer();
+        //edict_t *pEnt = NULL;
+        //edict_t *pPlayer = pClient->GetPlayer();
         
-        float range = 100;
-        
-        if ( arg2 && *arg2 )
-            range = atof(arg2);
+        //float range = 100;
+        //
+        //if ( arg2 && *arg2 )
+        //    range = atof(arg2);
         
         //FILE *fp;
         
         //fp = fopen("botlog.txt","a");
         
-        /*while ( (pEnt = UTIL_FindEntityInSphere(pEnt,pEntity->v.origin,range)) != NULL )
+        /*while ( (pEnt = UTIL_FindEntityInSphere(pEnt,pPlayer->v.origin,range)) != NULL )
         {
 			if ( pEnt->v
-            ALERT(at_console,""); //BotMessage(pEntity,0,"Found: id: %d, classname:%s distance:%0.2f iuser3:%d pclass:%d\niuser1 %d, iuser2 %d, iuser4 %d, euser1 0x%x, euser2 0x%x",ENTINDEX(pEnt),STRING(pEnt->v.classname),(EntityOrigin(pEnt) - pEntity->v.origin).Length(),pEnt->v.iuser3,pEnt->v.playerclass,pEnt->v.iuser1,pEnt->v.iuser2,pEnt->v.iuser4,pEnt->v.euser1,pEnt->v.euser2);
+            ALERT(at_console,""); //BotMessage(pPlayer,0,"Found: id: %d, classname:%s distance:%0.2f iuser3:%d pclass:%d\niuser1 %d, iuser2 %d, iuser4 %d, euser1 0x%x, euser2 0x%x",ENTINDEX(pEnt),STRING(pEnt->v.classname),(EntityOrigin(pEnt) - pPlayer->v.origin).Length(),pEnt->v.iuser3,pEnt->v.playerclass,pEnt->v.iuser1,pEnt->v.iuser2,pEnt->v.iuser4,pEnt->v.euser1,pEnt->v.euser2);
         }
         */
         //fclose(fp);
@@ -1623,7 +1622,7 @@ eBotCvarState BotFunc_AddBot ( CClient *pClient, const char *arg1, const char *a
 	
 	char *szName = NULL;
 	
-	int iSkill = DEF_BOT_SKILL;
+	//int iSkill = DEF_BOT_SKILL;
 	
 	iBotIndex = 0;
 	
@@ -2062,7 +2061,7 @@ eBotCvarState BotFunc_AddBot ( CClient *pClient, const char *arg1, const char *a
     // give some time for next client command
     gBotGlobals.m_fNextJoinTeam = gpGlobals->time + 0.2;
     
-    iSkill = pBot->m_Profile.m_iSkill;
+    //iSkill = pBot->m_Profile.m_iSkill;
     
     // Workout reaction time.
     //pBot->m_fReactionTime = BOT_DEFAULT_REACTION_TIME;

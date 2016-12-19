@@ -254,7 +254,7 @@ void RemoveNameTags ( const char *in_string, char *out_string )
 
 	char current_char;
 
-	char tag_start;
+	//char tag_start;
 	int tag_size = 0;
 	bool space_allowed = FALSE;
 	bool inside_tag;
@@ -319,7 +319,7 @@ void RemoveNameTags ( const char *in_string, char *out_string )
 		else if ( (in_string[i] == '(') || (in_string[i] == '[') || (in_string[i] == '{') )
 		{
 			inside_tag = TRUE;
-			tag_start = in_string[i];
+			//tag_start = in_string[i];
 			tag_size=0;
 			i++;
 			continue;
@@ -1097,14 +1097,13 @@ void HAL_MakeWords (char *input, HAL_DICTIONARY *words)
 {
    // this function breaks a string into an array of words
    int offset = 0;
-   int iLen;
 
    if ( !input || !*input )
       return; // if void, return
 
    // re-written
 
-   iLen = strlen(input);
+   //const int iLen = strlen(input);
 
    // clear the entries in the dictionary
    HAL_EmptyDictionary (words);

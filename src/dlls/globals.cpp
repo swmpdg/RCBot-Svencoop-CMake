@@ -314,7 +314,7 @@ void CBotGlobals :: StartFrame ( void )
 		// Also check out the auto build stuff
 		if ( m_iCurrentMod == MOD_NS )
 		{
-			int iNumHivesUp = 0;
+			//int iNumHivesUp = 0;
 			int iNumUpgrades = 0;
 			//hive_info_t *pHiveInfo;
 

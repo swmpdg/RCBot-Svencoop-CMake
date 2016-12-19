@@ -565,9 +565,9 @@ int CBotWeapons :: GetBestWeaponId( CBot *pBot, edict_t *pEnemy )
 					
 					if ( pBot->HasWeapon(VALVE_WEAPON_MP5) )
 					{
-						CBotWeapon *pWeapon = pBot->m_Weapons.GetWeapon(VALVE_WEAPON_MP5);
+						CBotWeapon *pMP5Weapon = pBot->m_Weapons.GetWeapon(VALVE_WEAPON_MP5);
 						
-						if ( pWeapon->SecondaryAmmo() > 0 )
+						if ( pMP5Weapon->SecondaryAmmo() > 0 )
 							iAllowedWeapons[VALVE_WEAPON_MP5] = 1;
 					}
 				}
@@ -581,9 +581,9 @@ int CBotWeapons :: GetBestWeaponId( CBot *pBot, edict_t *pEnemy )
 
 			if ( pBot->HasWeapon(VALVE_WEAPON_MP5) )
 			{
-				CBotWeapon *pWeapon = pBot->m_Weapons.GetWeapon(VALVE_WEAPON_MP5);
+				CBotWeapon *pMP5Weapon = pBot->m_Weapons.GetWeapon(VALVE_WEAPON_MP5);
 
-				if ( pWeapon->SecondaryAmmo() > 0 )
+				if ( pMP5Weapon->SecondaryAmmo() > 0 )
 					iAllowedWeapons[VALVE_WEAPON_MP5] = 1;
 			}
 		}

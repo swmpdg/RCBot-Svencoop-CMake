@@ -1333,7 +1333,7 @@ edict_t *UTIL_FindRandomUnusedFuncResource ( CBot *pBot )
 	dataUnconstArray<edict_t *> theResources;
 //	int iMem;
 
-	Vector vOrigin = pBot->pev->origin;
+	//Vector vOrigin = pBot->pev->origin;
 
 	while ( (pFuncResource = UTIL_FindEntityByClassname(pFuncResource,"func_resource")) != NULL )
 	{	
@@ -1654,7 +1654,7 @@ void ExplosionCreate( const Vector &center, const Vector &angles, edict_t *pOwne
 		WRITE_BYTE( TE_EXPLFLAG_NONE );
 		MESSAGE_END();
 
-		float mag = magnitude*4;
+		//float mag = magnitude*4;
 
 		if ( doDamage )
 		{

@@ -825,18 +825,18 @@ void InitMessage ( const char *message );
 					//clear from i
 
 					int pos = n;
-					int n = 0;
+					int n2 = 0;
 
-					for ( n = 0; pos < MAX_STORED_AUTOWAYPOINT; n ++ )
+					for ( n2 = 0; pos < MAX_STORED_AUTOWAYPOINT; n2 ++ )
 					{
 						m_vLastAutoWaypointCheckPos[n] = m_vLastAutoWaypointCheckPos[pos];
 
 						pos++;
 					}
 
-					for ( n = n; n < MAX_STORED_AUTOWAYPOINT; n ++ )
+					for ( n2 = n2; n2 < MAX_STORED_AUTOWAYPOINT; n2 ++ )
 					{
-						m_vLastAutoWaypointCheckPos[n].UnSetPoint();					
+						m_vLastAutoWaypointCheckPos[n2].UnSetPoint();					
 					}
 				}
 
@@ -953,7 +953,6 @@ CClient *CClients :: ClientConnected ( edict_t *pPlayer )
 		pClient->m_fJoinServerTime = gpGlobals->time;
 
 		int iPlayerRepId = GetPlayerRepId(STRING(pPlayer->v.netname));
-		int i;
 		CBot *pBot;
 		
 		pClient->UpdatePlayerRepId ( iPlayerRepId );
@@ -964,9 +963,9 @@ CClient *CClients :: ClientConnected ( edict_t *pPlayer )
 				pClient->AutoWaypoint(1);
 		}
 		
-		for ( i = 0; i < MAX_PLAYERS; i ++ )
+		for ( int iPlayer = 0; iPlayer < MAX_PLAYERS; iPlayer++ )
 		{
-			pBot = &gBotGlobals.m_Bots[i];
+			pBot = &gBotGlobals.m_Bots[ iPlayer ];
 			
 			if ( !pBot )
 				continue;

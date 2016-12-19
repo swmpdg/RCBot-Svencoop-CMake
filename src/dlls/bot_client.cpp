@@ -454,7 +454,7 @@ void BotClient_TS_WeaponInfo :: execute ( void *p, int iIndex )
 		break;
 	case 3:
 		{
-			int mode = *(int*)p;
+			//int mode = *(int*)p;
 			
 			gBotGlobals.m_Weapons.AddWeapon(id,"tsweapon",ammo,ammo,0,0,0,0,0);
 
@@ -481,12 +481,12 @@ void BotClient_TS_WeaponInfo :: execute ( void *p, int iIndex )
 
 void BotClient_NS_TechSlots :: execute ( void *p, int iIndex )
 {
-	static int iSlots;
+	//static int iSlots;
 	short int *iState;
 
 	if ( (p == NULL) || (iIndex==-1) )
 	{
-		iSlots = 0;
+		//iSlots = 0;
 		return;
 	}
 
@@ -495,7 +495,7 @@ void BotClient_NS_TechSlots :: execute ( void *p, int iIndex )
 	switch ( POINTER_TO_INT(iState) )
 	{
 	case 0:
-		iSlots = POINTER_TO_INT(p);
+		//iSlots = POINTER_TO_INT(p);
 		break;
 	case 1:
 		break;
@@ -503,7 +503,7 @@ void BotClient_NS_TechSlots :: execute ( void *p, int iIndex )
 		break;
 	}
 
-	iSlots = POINTER_TO_INT(p);
+	//iSlots = POINTER_TO_INT(p);
 
 
 	POINTER_INCREMENT_VALUE(iState);
@@ -512,7 +512,7 @@ void BotClient_NS_TechSlots :: execute ( void *p, int iIndex )
 void BotClient_BG_MakeMessage :: execute ( void *p, int iIndex )
 {
 	static int iSenderId = 0;
-	static int iMsg = 0;
+	//static int iMsg = 0;
 	short int *iState;
 
 	if ( (p == NULL) || (iIndex==-1) )
@@ -800,7 +800,7 @@ void BotClient_Generic_TextMessage :: execute ( void *p, int iIndex )
 // global (all)
 void BotClient_All_Generic_SayText :: execute ( void *p, int iIndex )
 {
-	static int iSenderId;
+	//static int iSenderId;
 //	char *szMsg;
 	short int *iState = &gBotGlobals.m_iCurrentMessageState;
 
@@ -808,7 +808,9 @@ void BotClient_All_Generic_SayText :: execute ( void *p, int iIndex )
 		return;
 
 	if ( POINTER_VALUE(iState) == 0 )
-		iSenderId = POINTER_TO_INT(p);
+	{
+		//iSenderId = POINTER_TO_INT(p);
+	}
 	else
 	{		
 
@@ -820,9 +822,10 @@ void BotClient_All_Generic_SayText :: execute ( void *p, int iIndex )
 // Happens when someone says a message
 // ... this does not happen to bots in NS 3.. WHY??!
 // (sticking to "say" / "say_team" catching in clientcommand
+//TODO: NS uses a custom chat command iirc - Solokiller
 void BotClient_Generic_SayText :: execute ( void *p, int iIndex )
 {
-	static int iSenderId;
+	//static int iSenderId;
 //	char *szMsg;
 	short int *iState = &gBotGlobals.m_iCurrentMessageState;
 
@@ -830,7 +833,9 @@ void BotClient_Generic_SayText :: execute ( void *p, int iIndex )
 		return;
 
 	if ( POINTER_VALUE(iState) == 0 )
-		iSenderId = POINTER_TO_INT(p);
+	{
+		//iSenderId = POINTER_TO_INT(p);
+	}
 	else
 	{		
 		/*edict_t *pSender;		
@@ -1424,7 +1429,7 @@ void BotClient_NS_SetOrder :: execute ( void *p, int iIndex )
 	static Vector				vOrigin;
 	static dataStack<int>		iReceiverIndexes;
 	static AvHOrderType			iOrderType			= ORDERTYPE_UNDEFINED;
-	static AvHOrderTargetType	iOrderTargetType	= ORDERTARGETTYPE_UNDEFINED;
+	//static AvHOrderTargetType	iOrderTargetType	= ORDERTARGETTYPE_UNDEFINED;
 	static int					iOrderStatus		= 0;
 	static int                   iReceivers			= 0;
 	static int					iEntityUser3		= 0;
@@ -1564,7 +1569,7 @@ void BotClient_NS_SetOrder :: execute ( void *p, int iIndex )
 		
 		iReceiverIndexes.Destroy();
 		iOrderType = ORDERTYPE_UNDEFINED;
-		iOrderTargetType = ORDERTARGETTYPE_UNDEFINED;
+		//iOrderTargetType = ORDERTARGETTYPE_UNDEFINED;
 		iOrderStatus = 0;
 		
 		pEntity = NULL;
@@ -1630,8 +1635,8 @@ void BotClient_NS_SetOrder :: execute ( void *p, int iIndex )
 			   {
 			   case 1:
 				   {
-					   int iIndex = POINTER_TO_INT(p);
-					   pEntity = INDEXENT(iIndex);
+					   int iEntIndex = POINTER_TO_INT(p);
+					   pEntity = INDEXENT( iEntIndex );
 				   }
 				   break;
 			   case 2:
@@ -1937,7 +1942,7 @@ void BotClient_Generic_CurrentWeapon :: execute ( void *p, int iIndex )
 		}
 		else if (iId < MAX_WEAPONS)
 		{
-			int st = iState;
+			//int st = iState;
     /*WEAPON_ON_TARGET    = 0x01,
     WEAPON_IS_CURRENT    = 0x02,
     WEAPON_IS_ENABLED    = 0x04*/

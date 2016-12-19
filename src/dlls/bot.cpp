@@ -502,7 +502,7 @@ void CBot :: BotEvent ( eBotEvent iEvent, edict_t *pInfo, edict_t *pExtInfo, flo
 			// dont like this player much
 			if ( m_Profile.m_Rep.GetClientRep(pClient) < BOT_MID_REP )
 			{			
-				int iRep = m_Profile.m_Rep.GetClientRep(pExtClient);
+				//int iRep = m_Profile.m_Rep.GetClientRep(pExtClient);
 				
 				if ( BotFunc_IncreaseRep(iRep,BotFunc_DistanceBetweenEdicts(pInfo,pExtInfo),m_Profile.m_iSkill) )
 				{
@@ -1861,7 +1861,7 @@ void CBot :: SpawnInit ( BOOL bInit )
 	
     m_bNeedToInit = FALSE;
 	
-    Vector m_vCurrentLookDir = Vector(0,0,0);
+    m_vCurrentLookDir = Vector(0,0,0);
 //    m_bCurrentLookDirIsValid = FALSE;
 	
     m_vMoveToVector = Vector(0,0,0);    
@@ -3386,7 +3386,7 @@ void CBot :: Think ( void )
 				{
 					// guess final position of grenade
 
-					Vector v_src = EntityOrigin(m_pAvoidEntity);
+					//Vector v_src = EntityOrigin(m_pAvoidEntity);
 
 					BotFunc_TraceToss(m_pAvoidEntity,NULL,&tr);
 					//UTIL_TraceLine(v_src,v_src+m_pAvoidEntity->v.velocity*5.0,ignore_monsters,dont_ignore_glass,m_pAvoidEntity,&tr);
@@ -3981,7 +3981,7 @@ void CBot :: LookForNewTasks ( void )
 	
 	//tempStack = m_stBotVisibles;
 	
-	BOOL bCanBuildNearby;
+	//BOOL bCanBuildNearby;
 	
 	int iToBuild = 0;
 	
@@ -3994,7 +3994,7 @@ void CBot :: LookForNewTasks ( void )
 		if ( pEntity == m_pEdict )
 			continue;
 		
-		bCanBuildNearby = FALSE;
+		//bCanBuildNearby = FALSE;
 		
 		pEntitypev = &pEntity->v;
 		
@@ -4966,13 +4966,14 @@ void CBot :: LookForNewTasks ( void )
 				// found?
 				if ( pFoundWeapon )
 				{
-					int iNewScheduleId = m_Tasks.GetNewScheduleId();
+					//TODO: probably should be using iNewScheduleId allocated at the start of the switch here - Solokiller
+					int iNewScheduleId2 = m_Tasks.GetNewScheduleId();
 					int iWpt = WaypointLocations.NearestWaypoint(EntityOrigin(pFoundWeapon), REACHABLE_RANGE, m_iLastFailedWaypoint, TRUE, FALSE, TRUE, &m_FailedGoals);
 					
 					if ( iWpt != -1 )
 					{
 						// get it
-						AddPriorityTask(CBotTask(BOT_TASK_FIND_PATH,iNewScheduleId,pFoundWeapon));
+						AddPriorityTask(CBotTask(BOT_TASK_FIND_PATH, iNewScheduleId2,pFoundWeapon));
 						RemoveCondition(BOT_CONDITION_NEED_WEAPONS);
 						break; // done got a task...
 					}
@@ -5394,7 +5395,7 @@ void CBot :: LookForNewTasks ( void )
                                 {
                                 case TFC_CLASS_SNIPER:
                                     {
-                                        int iWpt = WaypointFindRandomGoal(m_pEdict,m_iTeam,W_FL_TFC_SNIPER,NULL);
+                                        iWpt = WaypointFindRandomGoal(m_pEdict,m_iTeam,W_FL_TFC_SNIPER,NULL);
                                         
                                         if ( iWpt != -1 )
                                         {
@@ -5459,7 +5460,7 @@ void CBot :: LookForNewTasks ( void )
 											break;
 										case BOT_CAN_BUILD_SENTRY:
 											{
-												int iWpt = WaypointFindRandomGoal(m_pEdict,m_iTeam,W_FL_TFC_SENTRY,&m_FailedGoals);
+												iWpt = WaypointFindRandomGoal(m_pEdict,m_iTeam,W_FL_TFC_SENTRY,&m_FailedGoals);
 												
 												if ( iWpt != -1 )
 												{
@@ -5485,7 +5486,7 @@ void CBot :: LookForNewTasks ( void )
 											{
 												//eBotTask iTask, int iScheduleId = 0, edict_t *pInfo = NULL, int iInfo = 0, float fInfo = 0, Vector vInfo = Vector(0,0,0), float fTimeToComplete = -1.0												
 
-												int iWpt = UTIL_GetBuildWaypoint(m_vSpawnPosition.GetVector(),&m_FailedGoals);
+												iWpt = UTIL_GetBuildWaypoint(m_vSpawnPosition.GetVector(),&m_FailedGoals);
 
 												/*
 												int iWpt = WaypointLocations.GetCoverWaypoint (pev->origin,pev->origin,NULL);
@@ -5514,12 +5515,13 @@ void CBot :: LookForNewTasks ( void )
 													
 													CRememberPosition *pos = m_vRememberedPositions.positionNearest(m_vSpawnPosition.GetVector(),GetGunPosition());// m_vLastSeeEnemyPosition.GetVector();
 
-													Vector vOrigin = pev->origin;
+													//TODO: use the vOrigin local declared above? - Solokiller
+													Vector vMyOrigin = pev->origin;
 
 													if ( pos )
-														vOrigin = pos->getVector();
+														vMyOrigin = pos->getVector();
 
-													int iWpt = UTIL_GetBuildWaypoint(vOrigin,&m_FailedGoals);//WaypointLocations.GetCoverWaypoint (vOrigin,vOrigin,NULL);
+													iWpt = UTIL_GetBuildWaypoint(vMyOrigin,&m_FailedGoals);//WaypointLocations.GetCoverWaypoint (vMyOrigin,vMyOrigin,NULL);
 
 													if ( iWpt != -1 )
 													{
@@ -5548,9 +5550,7 @@ void CBot :: LookForNewTasks ( void )
 											}
 											break;
 										case BOT_CAN_BUILD_TELE_EXIT:
-											{
-												int iWpt;
-												
+											{												
 												CRememberPosition *pos = m_vRememberedPositions.positionNearest(gBotGlobals.TFCGoals[m_iTeam].GetVector(),GetGunPosition());// m_vLastSeeEnemyPosition.GetVector();
 												
 												if ( pos )
@@ -5579,7 +5579,7 @@ void CBot :: LookForNewTasks ( void )
 											break;
 										case BOT_CAN_BUILD_DISPENSER:											
 											{					
-												int iWpt = WaypointLocations.NearestWaypoint(m_vLastSeeEnemyPosition.GetVector(),REACHABLE_RANGE,TRUE);
+												iWpt = WaypointLocations.NearestWaypoint(m_vLastSeeEnemyPosition.GetVector(),REACHABLE_RANGE,TRUE);
 												
 												if ( iWpt != -1 )
 												{
@@ -7961,11 +7961,11 @@ void CBot :: SetViewAngles ( const Vector &pOrigin )
 	
 	m_CurrentTask = m_Tasks.CurrentTask();
 	
-	eBotTask iCurrentTask = BOT_TASK_NONE;
+	//eBotTask iCurrentTask = BOT_TASK_NONE;
 	
 	// get the current task name
-	if ( m_CurrentTask != NULL )
-		iCurrentTask = m_CurrentTask->Task();
+	//if ( m_CurrentTask != NULL )
+	//	iCurrentTask = m_CurrentTask->Task();
 	
 	vAngles.z = 0;
 	pev->v_angle.z = pev->v_angle.z = 0;
@@ -9608,7 +9608,7 @@ BOOL CBot :: IsEnemy ( edict_t *pEntity )
 		{
 			char *szClassname = (char*)STRING(pEntity->v.classname);
 			int iBestWeapon;
-			CBotWeapon *pWeapon;
+			//CBotWeapon *pWeapon;
 			entvars_t *pEnemypev = &pEntity->v;
 
 			if ( pEnemypev->flags & FL_CLIENT )
@@ -9620,7 +9620,7 @@ BOOL CBot :: IsEnemy ( edict_t *pEntity )
 			if ( (iBestWeapon = m_Weapons.GetBestWeaponId(this,pEntity)) <= 0 )
 				return FALSE;
 				
-			pWeapon = m_Weapons.GetWeapon(iBestWeapon);
+			//pWeapon = m_Weapons.GetWeapon(iBestWeapon);
 			
 			if ( pEnemypev->flags & FL_MONSTER )
 			{
@@ -12471,7 +12471,6 @@ void CBot :: DoTasks ()
 					{
 						if ( IsInVisibleList(pSound) )
 						{
-							Vector vOrigin;
 							Vector vSrc;
 							TraceResult tr;
 							
@@ -16180,9 +16179,9 @@ void CBot :: DoTasks ()
 				
 				if ( pTank != NULL )
 				{
-					float fDist;
-
-					fDist = DistanceFromEdict(pTank);
+					//float fDist;
+					//
+					//fDist = DistanceFromEdict(pTank);
 					
 					if ( !CanUseTank(pTank) )
 					{
@@ -16861,10 +16860,10 @@ void CBot :: UseTank ( edict_t *pTank )
 
 	AddPriorityTask(CBotTask(BOT_TASK_USE_TANK,iSchedId,pTank,0,RANDOM_FLOAT(12.0,22.0)));
 
-	CBotTask Tasks[] = 
-	{ 
-		CBotTask(BOT_TASK_USE,0,pTank,-2),
-	};
+	//CBotTask Tasks[] = 
+	//{ 
+	//	CBotTask(BOT_TASK_USE,0,pTank,-2),
+	//};
 	
 	m_Tasks.GiveSchedIdDescription(iSchedId,BOT_SCHED_USE_TANK);
 }
