@@ -44,6 +44,9 @@
 // export functions for DLL/so file
 //
 
+//Used for both Metamod and Standalone builds - Solokiller
+#include "GiveFnptrsToDllExport.h"
+
 #ifndef RCBOT_META_BUILD
 
 #include "extdll.h"
@@ -52,8 +55,7 @@
 #include "util.h"
 #include "cbase.h"
 #include "engine.h"
-
-#include "h_export.h"
+#include "linkent.h"
 
 #include "bot_const.h"
 #include "bot.h"

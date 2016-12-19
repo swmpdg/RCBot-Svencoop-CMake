@@ -34,6 +34,13 @@
 
 #include "Platform.h"
 
+#ifdef _WIN32
+//The one function in Half-Life 1 that uses stdcall. Be aware of this. - Solokiller
+#define GIVEFNPTRS_DLLEXPORT __stdcall
+#else
+#define GIVEFNPTRS_DLLEXPORT DLLEXPORT
+#endif
+
 // Header file containing definition of globalvars_t and entvars_t
 typedef int	func_t;					//
 typedef int	string_t;				// from engine's pr_comp.h;
