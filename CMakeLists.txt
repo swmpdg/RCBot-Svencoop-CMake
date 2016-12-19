@@ -204,8 +204,10 @@ if( MSVC )
 	#See https://connect.microsoft.com/VisualStudio/Feedback/Details/1941836 for more information.
 	#Enable string pooling.
 	#Enable function-level thinking.
+	#Use program database for Edit and Continue to allow proper debugging.
+	#Set object file name to end with a trailing backslash.
 	#Enable browse information, output to file RCBot.
-	set( GLOBAL_COMPILER_FLAGS "/W4 /WX /Zc:threadSafeInit- /GF /Gy /Fo\":$(IntDir)\\\" /FRRCBot" )
+	set( GLOBAL_COMPILER_FLAGS "/W4 /WX /Zc:threadSafeInit- /GF /Gy /ZI /Fo\":$(IntDir)\\\" /FRRCBot" )
 	
 	#Optimize for speed.
 	#Precise floating point operations.
